@@ -21,4 +21,12 @@ export class UsersComponent {
   constructor(){
     this.users$ = this.usersServ.getUsers();
   }
+
+  deleteUser(id: string){
+    console.log(id);
+    
+    this.usersServ.deleteUser(id).subscribe(x=> {
+      this.users$ = this.usersServ.getUsers();
+    });
+  }
 }
