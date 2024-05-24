@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Zura Jeladze",
+      "email": "Zura@gmail.com",
+      "status": "admin"
+    },
+    {
+      "id": "2",
+      "name": "ewrte",
+      "email": "wertwe@dterte",
+      "status": "user"
+    },
+    {
+      "id": "3",
+      "name": "sdfs",
+      "email": "dsfg@fdgdf.ge",
+      "status": "user"
+    }
+  ]
+} 
