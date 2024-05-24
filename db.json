@@ -1,19 +1,22 @@
 {
-    "users": [
-      {
-        "id": "123",
-        "name": "asd asd",
-        "email": "sdfsd@sdfsd.com"
-      },
-      {
-        "id": "1",
-        "name": "Zura Jeladze",
-        "email": "zura@gmail.com"
-      },
-      {
-        "id": "42969",
-        "name": "sdfs",
-        "email": "dsfg@fdgdf.com"
-      }
-    ]
-  }
+  "users": [
+    {
+      "id": "1",
+      "name": "Zura Jeladze",
+      "email": "Zura@gmail.com",
+      "status": "admin"
+    },
+    {
+      "id": "2",
+      "name": "ewrte",
+      "email": "wertwe@dterte",
+      "status": "user"
+    },
+    {
+      "id": "3",
+      "name": "sdfs",
+      "email": "dsfg@fdgdf.ge",
+      "status": "user"
+    }
+  ]
+} 
