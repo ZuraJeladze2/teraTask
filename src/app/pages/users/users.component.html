@@ -34,6 +34,7 @@
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
                 <td mat-cell *matCellDef="let element" class="f-row c">
                     <button mat-button [routerLink]="['view', element.id]">Detailed</button>
+                    <button mat-button [routerLink]="['create', element.id]">Edit</button>
                     <button (click)="deleteUser(element.id)" mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
                         <mat-icon>delete</mat-icon>
                     </button>
