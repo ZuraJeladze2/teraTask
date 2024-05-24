@@ -1,13 +1,69 @@
-@for(user of users$ | async; track user.id){
-<mat-card>
-    <mat-card-header>
-        <mat-card-title> {{user.name}} #{{user.id}} {{user.status}} </mat-card-title>
-        <mat-card-subtitle> {{user.email}} </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
-        <button mat-stroked-button [routerLink]="['view', user.id]">detailed</button>
-        <button mat-stroked-button color="warn" (click)="deleteUser(user.id)">delete</button>
-    </mat-card-actions>
-</mat-card>
+<div class="grid-wrapper">
+    @if(tableView){
+    @if((users$ | async); as users){
+    <div class="mat-elevation-z8 table-wrapper">
+        <table mat-table [dataSource]="users">
 
-}
+            <!-- id Column -->
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef class="id-col"> # </th>
+                <td mat-cell *matCellDef="let element" class="id-col"> {{element.id}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"><a [routerLink]="['view', element.id]"> {{element.name}} </a>
+                </td>
+            </ng-container>
+
+            <!-- email Column -->
+            <ng-container matColumnDef="email">
+                <th mat-header-cell *matHeaderCellDef> E-mail </th>
+                <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+            
+            <!-- status Column -->
+            <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+            </ng-container>
+
+            <!-- actions Column -->
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef> Actions </th>
+                <td mat-cell *matCellDef="let element" class="f-row c">
+                    <button mat-button [routerLink]="['view', element.id]">Detailed</button>
+                    <button (click)="deleteUser(element.id)" mat-mini-fab color="warn" aria-label="Example icon button with a filter list icon">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons
+            aria-label="Select page of periodic elements">
+        </mat-paginator>
+    </div>
+    }
+    }
+    @else {
+    <div class="f-row c">
+        @for(user of users$ | async; track user.id){
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title> {{user.name}} #{{user.id}} {{user.status}} </mat-card-title>
+                <mat-card-subtitle> {{user.email}} </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-actions>
+                <button mat-stroked-button [routerLink]="['view', user.id]">detailed</button>
+                <button mat-stroked-button color="warn" (click)="deleteUser(user.id)">delete</button>
+            </mat-card-actions>
+        </mat-card>
+        }
+    </div>
+    }
+</div>
