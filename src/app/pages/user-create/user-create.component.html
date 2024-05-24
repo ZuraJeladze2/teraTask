@@ -1,6 +1,11 @@
 <div class="form-wrapper">
     <form [formGroup]="userForm" class="register-form">
-        <h2>User Registration</h2>
+        @if(user$ | async){
+            <h2>Register User</h2>
+        }
+        @else {
+            <h2>Edit User</h2>
+        }
         <mat-form-field class="example-form-field" appearance="outline">
             <mat-label>Name</mat-label>
             <input matInput stroke type="text" formControlName="name">
@@ -31,6 +36,6 @@
             }
         </mat-form-field>
 
-        <button mat-raised-button color="primary" (click)="registerUser()">Register</button>
+        <button mat-raised-button color="primary" (click)="registerUser()">Submit</button>
     </form>
 </div>
