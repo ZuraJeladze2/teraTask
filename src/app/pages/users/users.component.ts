@@ -5,11 +5,12 @@ import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [AsyncPipe, MatCardModule, MatButtonModule],
+  imports: [AsyncPipe, MatCardModule, MatButtonModule, RouterLink],
   templateUrl: './users.component.html',
   styleUrl: './users.component.scss'
 })
