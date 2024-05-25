@@ -1,19 +1,6 @@
 {
   "users": [
     {
-      "id": "1",
-      "name": "Zura Jeladze",
-      "email": "Zura@gmail.com",
-      "password": "1231"
-    },
-    {
-      "id": "2",
-      "name": "Mate Jeladze",
-      "email": "Mate@gmail.com",
-      "role": "user",
-      "password": "1231"
-    },
-    {
       "id": "3",
       "name": "Zura",
       "email": "Zura@gmail.com",
@@ -22,7 +9,7 @@
     },
     {
       "id": "QhMDMCL",
-      "name": "new one",
+      "name": "edited one",
       "email": "hey@hai.ge",
       "password": "1233123"
     }

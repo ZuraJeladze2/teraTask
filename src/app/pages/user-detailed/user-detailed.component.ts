@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
@@ -9,11 +9,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { CardComponent } from "../../components/card/card.component";
 
 @Component({
-    selector: 'app-user-detailed',
-    standalone: true,
-    templateUrl: './user-detailed.component.html',
-    styleUrl: './user-detailed.component.scss',
-    imports: [AsyncPipe, NgIf, MatCardModule, MatButtonModule, RouterLink, CardComponent]
+  selector: 'app-user-detailed',
+  standalone: true,
+  imports: [AsyncPipe, NgIf, MatCardModule, MatButtonModule, RouterLink, CardComponent],
+  templateUrl: './user-detailed.component.html',
+  styleUrl: './user-detailed.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserDetailedComponent {
   userService = inject(UserService)
