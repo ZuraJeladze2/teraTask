@@ -4,14 +4,15 @@
       "id": "3",
       "name": "Zuraedit",
       "email": "Zura@gmail.com",
-      "password": "1231",
+      "password": "1234",
       "role": "user"
     },
     {
       "id": "QhMDMCL",
-      "name": "edited yeaa",
+      "name": "edited",
       "email": "hey@hai.ge",
-      "password": "1233123"
+      "password": "1233123",
+      "role": "user"
     },
     {
       "id": "Z5eqgmE",
@@ -22,7 +23,7 @@
     },
     {
       "id": "cDFRXOl",
-      "name": "vau",
+      "name": "yes",
       "email": "yea@gmail.com",
       "password": "1232",
       "role": "user"

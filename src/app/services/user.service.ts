@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { User } from '../interfaces/user.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 
 @Injectable({
@@ -13,6 +13,9 @@ export class UserService {
   users$ = this.usersSubject.asObservable();
   private apiUrl = environment.apiUrl;
   private http = inject(HttpClient);
+  private headers = new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
 
   constructor() {
     this.loadUsers();
@@ -30,14 +33,20 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/users/${id}`);
   }
 
+  
+
   createUser(user: Partial<User>): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/users`, user).pipe(
+    return this.http.post<User>(`${this.apiUrl}/users`, user, {
+      headers: this.headers               //? json-serveris dokumentaciis mixedvit, tore isec mushaobs.
+    }).pipe(
       tap(() => this.loadUsers())
     );
   }
 
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/users/${user.id}`, user).pipe(
+    return this.http.put<User>(`${this.apiUrl}/users/${user.id}`, user, {
+      headers: this.headers               //? json-serveris dokumentaciis mixedvit, tore isec mushaobs.
+    }).pipe(
       tap(() => this.loadUsers())
     );
   }

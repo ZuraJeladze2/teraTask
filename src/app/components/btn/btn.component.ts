@@ -9,6 +9,5 @@ import { MatButtonModule } from '@angular/material/button';
   styleUrl: './btn.component.scss',
 })
 export class BtnComponent {
-  @Input() content: string = '';
   @Input() color: string = '';
 }
