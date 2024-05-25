@@ -25,7 +25,7 @@ export class UsersComponent {
   tableView: boolean = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  displayedColumns: string[] = ['id', 'name', 'email', 'status', 'actions'];
+  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
   dataSource = new MatTableDataSource<User>(this.users);
 
   constructor() {

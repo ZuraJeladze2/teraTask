@@ -64,7 +64,7 @@ export class UserCreateComponent {
   registerUser() {
     if (this.userForm.invalid) {
       this.errorMessage = 'invalid form!'
-      console.warn('araswori forma');
+      console.log(this.errorMessage);
       return;
     };
 
