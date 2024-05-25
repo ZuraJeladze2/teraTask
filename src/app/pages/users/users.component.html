@@ -54,16 +54,7 @@
     @else {
     <div class="f-row c">
         @for(user of users$ | async; track user.id){
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title> {{user.name}} #{{user.id}} {{user.status}} </mat-card-title>
-                <mat-card-subtitle> {{user.email}} </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-actions>
-                <button mat-stroked-button [routerLink]="['view', user.id]">detailed</button>
-                <button mat-stroked-button color="warn" (click)="deleteUser(user.id)">delete</button>
-            </mat-card-actions>
-        </mat-card>
+        <app-card [user]="user"></app-card>
         }
     </div>
     }

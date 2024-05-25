@@ -16,5 +16,5 @@ import { RouterLink } from '@angular/router';
 })
 export class CardComponent {
   @Input()
-  stream!: Observable<User>;
+  user!: User;
 }
