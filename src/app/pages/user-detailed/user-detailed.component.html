@@ -1,11 +1,2 @@
-@if(user$ | async; as user){
-<mat-card>
-    <mat-card-header>
-        <mat-card-title> {{user.name}} #{{user.id}} {{user.status}} </mat-card-title>
-        <mat-card-subtitle> {{user.email}} </mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-actions>
-        <button mat-stroked-button routerLink="">Go Back</button>
-    </mat-card-actions>
-</mat-card>
-}
+<h2>User detailed page</h2>
+<app-card [stream]="user$"></app-card>
