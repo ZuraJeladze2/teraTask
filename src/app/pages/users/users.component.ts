@@ -9,13 +9,14 @@ import { Observable } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
 import { MatIcon } from '@angular/material/icon';
+import { CardComponent } from "../../components/card/card.component";
 
 @Component({
-  selector: 'app-users',
-  standalone: true,
-  imports: [AsyncPipe, MatCardModule, MatButtonModule, RouterLink, MatTableModule, MatIcon, MatPaginatorModule, NgIf],
-  templateUrl: './users.component.html',
-  styleUrl: './users.component.scss'
+    selector: 'app-users',
+    standalone: true,
+    templateUrl: './users.component.html',
+    styleUrl: './users.component.scss',
+    imports: [AsyncPipe, MatCardModule, MatButtonModule, RouterLink, MatTableModule, MatIcon, MatPaginatorModule, NgIf, CardComponent]
 })
 export class UsersComponent {
   usersServ = inject(UserService)
