@@ -1,5 +1,6 @@
 //? todo: theme.scss
 @import 'assets/variable';
+
 /* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;
@@ -16,37 +17,41 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-a{
+a {
   color: #000;
   text-decoration: none;
 }
-a:active{
+
+a:active {
   color: $link_active;
 }
 
-.f-row{
+.f-row {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
   justify-content: start;
   gap: 20px;
 
-  &.c{
+  &.c {
     justify-content: center;
   }
 
-  &.b{
+  &.b {
     justify-content: center;
   }
 
-  &.e{
+  &.e {
     justify-content: center;
   }
 }
 
-.grid-wrapper{
-  width: 100%;
-  height: 100%;
+.grid-wrapper {
   display: grid;
   place-items: center;
+}
+
+.overlay {
+  width: 100%;
+  height: 100%;
 }

@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "3",
-      "name": "Zura",
+      "name": "Zuraedit",
       "email": "Zura@gmail.com",
       "password": "1231"
     },
@@ -11,6 +11,12 @@
       "name": "edited yeaa",
       "email": "hey@hai.ge",
       "password": "1233123"
+    },
+    {
+      "id": "Z5eqgmE",
+      "name": "register",
+      "email": "reg@us.er",
+      "password": "123123123"
     }
   ]
 }
