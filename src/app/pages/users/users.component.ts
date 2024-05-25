@@ -1,5 +1,5 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -10,6 +10,7 @@ import { BtnComponent } from "../../components/btn/btn.component";
 import { CardComponent } from "../../components/card/card.component";
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
+import { TableComponent } from "../../components/table/table.component";
 
 @Component({
   selector: 'app-users',
@@ -19,42 +20,17 @@ import { UserService } from '../../services/user.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe, MatButtonModule, RouterLink, MatTableModule, MatIcon,
-    MatPaginatorModule, NgIf, CardComponent, BtnComponent
+    MatPaginatorModule, NgIf, CardComponent, BtnComponent,
+    TableComponent
   ]
 })
-export class UsersComponent implements AfterViewInit, OnDestroy {
-  users$: Observable<User[]> = of([]);
-  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
-  dataSource = new MatTableDataSource<User>();
+export class UsersComponent implements OnInit {
+  users$: Observable<User[]> = new Observable<User[]>();
   tableView: boolean = true;
-  private unSubscriber:Subject<void> = new Subject<void>();
-
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  constructor(private usersServ: UserService) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.users$ = this.usersServ.getUsers();
-    this.users$
-      .pipe(takeUntil(this.unSubscriber))
-      .subscribe(users => {
-        this.dataSource.data = users;
-      });
-  }
-
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-  }
-
-  deleteUser(id: string) {
-    this.usersServ.deleteUser(id)
-      .pipe(takeUntil(this.unSubscriber))
-      .subscribe(); // UserService will update the BehaviorSubject
-  }
-
-  ngOnDestroy(): void {
-    this.unSubscriber.next();
-    this.unSubscriber.complete();
+    this.users$ = this.userService.getUsers();
   }
 
 }
