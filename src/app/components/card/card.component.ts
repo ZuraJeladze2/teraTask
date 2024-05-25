@@ -1,18 +1,18 @@
-import { Component, Input } from '@angular/core';
-import {AsyncPipe} from '@angular/common'
-import { Observable } from 'rxjs';
-import { User } from '../../interfaces/user.interface';
+import { AsyncPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { User } from '../../interfaces/user.interface';
 
 @Component({
   selector: 'app-card',
   standalone: true,
   imports: [AsyncPipe, RouterLink, MatCardModule, MatIconModule, MatButtonModule],
   templateUrl: './card.component.html',
-  styleUrl: './card.component.scss'
+  styleUrl: './card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent {
   @Input()

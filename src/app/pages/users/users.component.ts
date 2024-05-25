@@ -1,5 +1,5 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, ViewChild, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ViewChild, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -14,9 +14,10 @@ import { CardComponent } from "../../components/card/card.component";
 @Component({
     selector: 'app-users',
     standalone: true,
+    imports: [AsyncPipe, MatCardModule, MatButtonModule, RouterLink, MatTableModule, MatIcon, MatPaginatorModule, NgIf, CardComponent],
     templateUrl: './users.component.html',
     styleUrl: './users.component.scss',
-    imports: [AsyncPipe, MatCardModule, MatButtonModule, RouterLink, MatTableModule, MatIcon, MatPaginatorModule, NgIf, CardComponent]
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersComponent {
   usersServ = inject(UserService)

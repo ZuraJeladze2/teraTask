@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -18,7 +18,8 @@ import { AsyncPipe } from '@angular/common';
     MatIconModule, MatButtonModule, MatInputModule, AsyncPipe
   ],
   templateUrl: './user-create.component.html',
-  styleUrl: './user-create.component.scss'
+  styleUrl: './user-create.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UserCreateComponent {
   router = inject(Router)
