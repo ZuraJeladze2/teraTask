@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -6,7 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { UserService } from '../../services/user.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable, catchError, filter, map, of, retryWhen, switchMap, tap } from 'rxjs';
+import { Observable, Subject, catchError, filter, map, of, retryWhen, switchMap, takeUntil, tap } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
 import { AsyncPipe } from '@angular/common';
 
@@ -21,11 +21,12 @@ import { AsyncPipe } from '@angular/common';
   styleUrl: './user-create.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class UserCreateComponent {
+export class UserCreateComponent implements OnDestroy {
+
+  private unSubscriber: Subject<void> = new Subject<void>();
   router = inject(Router)
   route = inject(ActivatedRoute)
   userService = inject(UserService)
-
   errorMessage: string = '';
 
   userForm: FormGroup = new FormGroup({
@@ -55,17 +56,6 @@ export class UserCreateComponent {
     )
   );
 
-  // ? dzveli, wasashleli, avitanet pipehsi, catcherroris zemot
-  // tap(user => {
-  //   if (user) {
-  //     this.userForm.patchValue(user);
-  //     console.log('edit user:', user);
-  //   } else {
-  //     console.log('create user');
-  //   }
-  // })
-
-
   registerUser() {
     if (this.userForm.invalid) {
       this.errorMessage = 'invalid form!'
@@ -77,11 +67,21 @@ export class UserCreateComponent {
     const id = this.userForm.get('id')?.value;
     if (id) {
       console.log('id gvaq!', id);
-      this.userService.updateUser(userObj).subscribe(() => this.router.navigate(['']));
+      this.userService.updateUser(userObj)
+        .pipe(takeUntil(this.unSubscriber))
+        .subscribe(() => this.router.navigate(['']));
     }
     else {
       console.log('id ar gvaq!', id);
-      this.userService.createUser(userObj).subscribe(() => this.router.navigate(['']));
+      this.userService.createUser(userObj)
+        .pipe(takeUntil(this.unSubscriber))
+        .subscribe(() => this.router.navigate(['']));
     }
+  }
+
+
+  ngOnDestroy(): void {
+    this.unSubscriber.next();
+    this.unSubscriber.complete();
   }
 }
