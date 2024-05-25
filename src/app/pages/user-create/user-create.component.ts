@@ -34,32 +34,36 @@ export class UserCreateComponent {
     password: new FormControl<string>('', [Validators.required, Validators.minLength(4)])
   })
   user$: Observable<User | any> = this.route.params.pipe(
-    switchMap(params => {
-      if (Object.keys(params).length === 0) {
-        return of(null)
-      };
-      return this.userService.getUser(params['id']).pipe(
-        catchError(err => {
-          if (err.status === 404) {
-            console.warn('useri ver moidzebna');
-          }
-          return of(err)
-        })
-      );
-    }),
-    tap(data => {
-      if (data?.status === 404) {
-        this.router.navigateByUrl(''); //xelit chawerili araswori id
-      }
-      else if (data) {
-        this.userForm.patchValue(data)
-        console.log('edit user:', data);
-      }
-      else {
-        console.log('create user');
-      }
-    }),
-  )
+    switchMap(params =>
+      Object.keys(params).length === 0
+        ? of(null)
+        : this.userService.getUser(params['id']).pipe(
+          tap(user => {
+            // Logic for successfully fetched user
+            this.userForm.patchValue(user);
+            console.log('edit user:', user);
+          }),
+          catchError(err => {
+            if (err.status === 404) {
+              console.warn('useri ver moidzebna');
+              this.router.navigateByUrl(''); // Navigate to another page for invalid ID
+            }
+            return of(null); // Continue the stream with null
+          })
+        )
+    )
+  );
+
+  // ? dzveli, wasashleli, avitanet pipehsi, catcherroris zemot
+  // tap(user => {
+  //   if (user) {
+  //     this.userForm.patchValue(user);
+  //     console.log('edit user:', user);
+  //   } else {
+  //     console.log('create user');
+  //   }
+  // })
+
 
   registerUser() {
     if (this.userForm.invalid) {

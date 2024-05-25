@@ -19,6 +19,12 @@
       "email": "Zura@gmail.com",
       "role": "admin",
       "password": "1231"
+    },
+    {
+      "id": "QhMDMCL",
+      "name": "new one",
+      "email": "hey@hai.ge",
+      "password": "1233123"
     }
   ]
 }
