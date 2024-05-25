@@ -25,7 +25,7 @@ export class UserCreateComponent {
   route = inject(ActivatedRoute)
   userService = inject(UserService)
 
-  erroMessage: string = '';
+  errorMessage: string = '';
 
   userForm: FormGroup = new FormGroup({
     id: new FormControl<string>(''),
@@ -62,21 +62,21 @@ export class UserCreateComponent {
   )
 
   registerUser() {
-    if (this.userForm.valid) {
-      const id = this.userForm.get('id')?.value;
-      if (id) {
-        console.log('id gvaq!', id);
-        this.userService.updateUser(this.userForm.getRawValue()).subscribe(x => {
-          return this.router.navigate(['']);
-        })
-      }
-      else {
-        console.log('id ar gvaq!', id);
-        this.userService.createUser(this.userForm.getRawValue()).subscribe(x => {
-          return this.router.navigate(['']);
-        })
-      }
+    if (this.userForm.invalid) {
+      this.errorMessage = 'invalid form!'
+      console.warn('araswori forma');
+      return;
+    };
 
+    const userObj = this.userForm.getRawValue();
+    const id = this.userForm.get('id')?.value;
+    if (id) {
+      console.log('id gvaq!', id);
+      this.userService.updateUser(userObj).subscribe(() => this.router.navigate(['']));
+    }
+    else {
+      console.log('id ar gvaq!', id);
+      this.userService.createUser(userObj).subscribe(() => this.router.navigate(['']));
     }
   }
 }
