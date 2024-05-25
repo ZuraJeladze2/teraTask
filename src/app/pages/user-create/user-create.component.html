@@ -3,13 +3,17 @@
         <ng-container>
             @if(user$ | async){
             <h2 class="form__header">Edit User</h2>
+            <app-form [form]="userForm" state="edit"></app-form>
+            <div class="f-row btn-wrapper">
+                <app-btn content="Cancel" routerLink=""></app-btn>
+                <app-btn color="primary" content="Save" (click)="registerUser()" raised></app-btn>
+            </div>
             }
             @else {
             <h2 class="form__header">Register User</h2>
+            <app-form [form]="userForm" state="register"></app-form>
+            <app-btn color="primary" content="Register" (click)="registerUser()" raised></app-btn>
             }
         </ng-container>
-
-        <app-form [form]="userForm"></app-form>
-        <app-btn color="primary" content="Submit" (click)="registerUser()" raised></app-btn>
     </div>
 </div>
