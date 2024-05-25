@@ -12,4 +12,5 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class FormComponent {
   @Input() form!: FormGroup;
+  @Input() state!: 'login' | 'register' | 'edit';
 }

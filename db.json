@@ -4,7 +4,8 @@
       "id": "3",
       "name": "Zuraedit",
       "email": "Zura@gmail.com",
-      "password": "1231"
+      "password": "1231",
+      "role": "user"
     },
     {
       "id": "QhMDMCL",
@@ -16,7 +17,15 @@
       "id": "Z5eqgmE",
       "name": "register",
       "email": "reg@us.er",
-      "password": "123123123"
+      "password": "123123123",
+      "role": "user"
+    },
+    {
+      "id": "cDFRXOl",
+      "name": "vau",
+      "email": "yea@gmail.com",
+      "password": "1232",
+      "role": "user"
     }
   ]
 }

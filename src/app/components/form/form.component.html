@@ -1,16 +1,26 @@
 <form [formGroup]="form" class="form grid-wrapper">
-    <mat-form-field class="form__field" appearance="outline">
-        <mat-label>Name</mat-label>
-        <input matInput stroke type="text" formControlName="name">
-    </mat-form-field>
-    
+    @if(state === 'register' || state === 'edit'){
+        <mat-form-field class="form__field" appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput stroke type="text" formControlName="name">
+        </mat-form-field>
+    }
+
     <mat-form-field class="form__field" appearance="outline">
         <mat-label>E-mail</mat-label>
         <input matInput stroke type="email" formControlName="email">
     </mat-form-field>
-    
+
     <mat-form-field class="form__field" appearance="outline">
         <mat-label>Password</mat-label>
         <input matInput stroke type="password" formControlName="password">
     </mat-form-field>
+
+    @if(state === 'edit'){
+        <mat-form-field class="form__field" appearance="outline">
+            <mat-label>Role</mat-label>
+            <input matInput stroke type="role" formControlName="role">
+        </mat-form-field>
+    }
+    
 </form>
