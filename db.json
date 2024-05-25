@@ -1,9 +1,24 @@
 {
   "users": [
     {
+      "id": "1",
+      "name": "Zura Jeladze",
+      "email": "Zura@gmail.com",
+      "role": "user",
+      "password": "1231"
+    },
+    {
+      "id": "2",
+      "name": "Mate Jeladze",
+      "email": "Mate@gmail.com",
+      "role": "user",
+      "password": "1231"
+    },
+    {
       "id": "3",
       "name": "Zura",
       "email": "Zura@gmail.com",
+      "role": "admin",
       "password": "1231"
     }
   ]

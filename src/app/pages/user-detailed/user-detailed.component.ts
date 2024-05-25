@@ -6,13 +6,14 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { User } from '../../interfaces/user.interface';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
+import { CardComponent } from "../../components/card/card.component";
 
 @Component({
-  selector: 'app-user-detailed',
-  standalone: true,
-  imports: [AsyncPipe, NgIf, MatCardModule, MatButtonModule, RouterLink],
-  templateUrl: './user-detailed.component.html',
-  styleUrl: './user-detailed.component.scss'
+    selector: 'app-user-detailed',
+    standalone: true,
+    templateUrl: './user-detailed.component.html',
+    styleUrl: './user-detailed.component.scss',
+    imports: [AsyncPipe, NgIf, MatCardModule, MatButtonModule, RouterLink, CardComponent]
 })
 export class UserDetailedComponent {
   userService = inject(UserService)
