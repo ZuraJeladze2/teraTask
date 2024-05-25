@@ -15,12 +15,12 @@ export interface User {
      */
     email: string;
     /**
-     * User's status (either "user" or "admin")
+     * User's role (either "user" or "admin")
      */
-    status: Status;
+    role: Role;
 }
 
 /**
- * User status type (either "user" or "admin")
+ * User Role type (either "user" or "admin")
  */
-type Status = "user" | "admin";
+type Role = "user" | "admin";
