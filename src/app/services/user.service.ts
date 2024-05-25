@@ -1,71 +1,50 @@
 import { Injectable, inject } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { User } from '../interfaces/user.interface';
 import { HttpClient } from '@angular/common/http';
-/**
-* User service class that provides methods for interacting with the user API.
-*/
+import { tap } from 'rxjs/operators';
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-  /**
-  * API URL for user endpoints
-  */
-  apiUrl = environment.apiUrl;
+  private usersSubject = new BehaviorSubject<User[]>([]);
+  users$ = this.usersSubject.asObservable();
+  private apiUrl = environment.apiUrl;
+  private http = inject(HttpClient);
 
-  /**
-  * Injected HTTP client instance
-  */
-  http = inject(HttpClient);
-
-  /**
-  * Retrieves a list of all users
-  *
-  * @returns {Observable<User[]>} An observable that emits an array of User objects
-  */
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/users`);
+  constructor() {
+    this.loadUsers();
   }
 
-  /**
-  * Retrieves a single user by ID
-  *
-  * @param {string} id The ID of the user to retrieve
-  * @returns {Observable<User>} An observable that emits a single User object
-  */
+  loadUsers() {
+    this.http.get<User[]>(`${this.apiUrl}/users`).subscribe(users => this.usersSubject.next(users));
+  }
+
+  getUsers(): Observable<User[]> {
+    return this.users$;
+  }
+
   getUser(id: string): Observable<User> {
     return this.http.get<User>(`${this.apiUrl}/users/${id}`);
   }
 
-  /**
-  * Creates a new user
-  *
-  * @param {Partial<User>} user The partial user data to create
-  * @returns {Observable<User>} An observable that emits the created User object
-  */
   createUser(user: Partial<User>): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}/users`, user);
+    return this.http.post<User>(`${this.apiUrl}/users`, user).pipe(
+      tap(() => this.loadUsers())
+    );
   }
 
-  /**
-  * Updates an existing user
-  *
-  * @param {User} user The user data to update
-  * @returns {Observable<User>} An observable that emits the updated User object
-  */
   updateUser(user: User): Observable<User> {
-    return this.http.put<User>(`${this.apiUrl}/users/${user.id}`, user);
+    return this.http.put<User>(`${this.apiUrl}/users/${user.id}`, user).pipe(
+      tap(() => this.loadUsers())
+    );
   }
 
-  /**
-  * Deletes a user by ID
-  *
-  * @param {string} id The ID of the user to delete
-  * @returns {Observable<User>} An observable that emits the deleted User object
-  */
   deleteUser(id: string): Observable<User> {
-    return this.http.delete<User>(`${this.apiUrl}/users/${id}`);
+    return this.http.delete<User>(`${this.apiUrl}/users/${id}`).pipe(
+      tap(() => this.loadUsers())
+    );
   }
 }
