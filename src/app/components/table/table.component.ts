@@ -11,17 +11,19 @@ import { AsyncPipe, NgIf } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { BtnComponent } from '../btn/btn.component';
 import { CardComponent } from '../card/card.component';
+import { IconComponent } from "../icon/icon.component";
 
 @Component({
   selector: 'app-table',
   standalone: true,
-  imports: [
-    AsyncPipe, MatButtonModule, RouterLink, MatTableModule, MatIcon,
-    MatPaginatorModule, BtnComponent,
-  ],
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    AsyncPipe, RouterLink,
+    MatTableModule, MatPaginatorModule,
+    BtnComponent, IconComponent
+  ]
 })
 export class TableComponent implements OnInit, OnDestroy {
   usersServ = inject(UserService)
@@ -36,7 +38,10 @@ export class TableComponent implements OnInit, OnDestroy {
     this.dataSource.paginator = this.paginator;
     this.users$
       .pipe(takeUntil(this.unSubscriber))
-      .subscribe(users => this.dataSource.data = users);
+      .subscribe(users => {
+        this.dataSource.data = users
+        this.dataSource.paginator = this.paginator; // Reassign paginator after data update
+      });
   }
 
   deleteUser(id: string) {
