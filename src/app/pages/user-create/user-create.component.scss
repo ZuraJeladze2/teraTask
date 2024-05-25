@@ -1,12 +1,4 @@
-.form-wrapper{
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    display: grid;
-    place-items: center;
-}
-.register-form{
+.form {
     width: 400px;
     border: 2px solid black;
     display: flex;
@@ -14,6 +6,10 @@
     justify-content: center;
     align-items: center;
     padding: 25px 10px;
+
+    &__header{
+        margin-bottom: 20px;
+    }
 }
 
 mat-form-field{

@@ -1,39 +1,27 @@
-<div class="form-wrapper">
-    <form [formGroup]="userForm" class="register-form">
-        @if(user$ | async){
-        <h2>Register User</h2>
-        }
-        @else {
-        <h2>Edit User</h2>
-        }
-        <mat-form-field class="example-form-field" appearance="outline">
+<div class="grid-wrapper">
+    <form [formGroup]="userForm" class="form">
+        <ng-container>
+            @if(user$ | async){
+            <h2 class="form__header">Register User</h2>
+            }
+            @else {
+            <h2 class="form__header">Edit User</h2>
+            }
+        </ng-container>
+
+        <mat-form-field class="form__field" appearance="outline">
             <mat-label>Name</mat-label>
             <input matInput stroke type="text" formControlName="name">
-            @if (userForm.controls['name'].getRawValue()) {
-            <button matSuffix mat-icon-button aria-label="Clear" (click)="userForm.controls['name'].setValue('')">
-                <mat-icon>close</mat-icon>
-            </button>
-            }
         </mat-form-field>
 
-        <mat-form-field class="example-form-field" appearance="outline">
+        <mat-form-field class="form__field" appearance="outline">
             <mat-label>E-mail</mat-label>
             <input matInput stroke type="email" formControlName="email">
-            @if (userForm.controls['email'].getRawValue()) {
-            <button matSuffix mat-icon-button aria-label="Clear" (click)="userForm.controls['email'].setValue('')">
-                <mat-icon>close</mat-icon>
-            </button>
-            }
         </mat-form-field>
 
-        <mat-form-field class="example-form-field" appearance="outline">
+        <mat-form-field class="form__field" appearance="outline">
             <mat-label>Password</mat-label>
             <input matInput stroke type="password" formControlName="password">
-            @if (userForm.controls['password'].getRawValue()) {
-            <button matSuffix mat-icon-button aria-label="Clear" (click)="userForm.controls['password'].setValue('')">
-                <mat-icon>close</mat-icon>
-            </button>
-            }
         </mat-form-field>
 
         <button mat-raised-button color="primary" (click)="registerUser()">Submit</button>
