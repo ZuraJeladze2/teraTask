@@ -30,11 +30,9 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element" class="f-row c">
-                <app-btn [routerLink]="['view', element.id]" content="Detailed"></app-btn>
-                <app-btn [routerLink]="['create', element.id]" content="Edit"></app-btn>
-                <button (click)="deleteUser(element.id)" mat-mini-fab color="warn" aria-label="Delete icon">
-                    <mat-icon>delete</mat-icon>
-                </button>
+                <app-icon color="primary" name="perm_identity" [routerLink]="['view', element.id]"></app-icon>
+                <app-icon color="primary" name="edit" [routerLink]="['create', element.id]"></app-icon>
+                <app-icon color="warn" name="delete"></app-icon>
             </td>
         </ng-container>
 
