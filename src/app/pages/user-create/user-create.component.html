@@ -1,29 +1,15 @@
-<div class="grid-wrapper">
-    <form [formGroup]="userForm" class="form">
+<div class="grid-wrapper overlay">
+    <div class="form-wrapper grid-wrapper">
         <ng-container>
             @if(user$ | async){
-            <h2 class="form__header">Register User</h2>
+            <h2 class="form__header">Edit User</h2>
             }
             @else {
-            <h2 class="form__header">Edit User</h2>
+            <h2 class="form__header">Register User</h2>
             }
         </ng-container>
 
-        <mat-form-field class="form__field" appearance="outline">
-            <mat-label>Name</mat-label>
-            <input matInput stroke type="text" formControlName="name">
-        </mat-form-field>
-
-        <mat-form-field class="form__field" appearance="outline">
-            <mat-label>E-mail</mat-label>
-            <input matInput stroke type="email" formControlName="email">
-        </mat-form-field>
-
-        <mat-form-field class="form__field" appearance="outline">
-            <mat-label>Password</mat-label>
-            <input matInput stroke type="password" formControlName="password">
-        </mat-form-field>
-
-        <button mat-raised-button color="primary" (click)="registerUser()">Submit</button>
-    </form>
+        <app-form [form]="userForm"></app-form>
+        <app-btn color="primary" content="Submit" (click)="registerUser()" raised></app-btn>
+    </div>
 </div>

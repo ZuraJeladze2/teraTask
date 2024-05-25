@@ -9,17 +9,21 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subject, catchError, filter, map, of, retryWhen, switchMap, takeUntil, tap } from 'rxjs';
 import { User } from '../../interfaces/user.interface';
 import { AsyncPipe } from '@angular/common';
+import { FormComponent } from "../../components/form/form.component";
+import { BtnComponent } from "../../components/btn/btn.component";
 
 @Component({
   selector: 'app-user-create',
   standalone: true,
-  imports: [
-    MatFormFieldModule, ReactiveFormsModule,
-    MatIconModule, MatButtonModule, MatInputModule, AsyncPipe
-  ],
   templateUrl: './user-create.component.html',
   styleUrl: './user-create.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    ReactiveFormsModule,
+    AsyncPipe,
+    FormComponent,
+    BtnComponent
+  ]
 })
 export class UserCreateComponent implements OnDestroy {
 
@@ -59,7 +63,7 @@ export class UserCreateComponent implements OnDestroy {
   registerUser() {
     if (this.userForm.invalid) {
       this.errorMessage = 'invalid form!'
-      console.log(this.errorMessage);
+      console.log(this.errorMessage, this.userForm.value);
       return;
     };
 

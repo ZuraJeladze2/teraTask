@@ -1,17 +1,9 @@
-.form {
+.form-wrapper {
     width: 400px;
     border: 2px solid black;
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: center;
-    align-items: center;
     padding: 25px 10px;
 
-    &__header{
+    .form__header {
         margin-bottom: 20px;
     }
-}
-
-mat-form-field{
-    width: 250px;
 }
