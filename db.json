@@ -1,31 +1,52 @@
 {
   "users": [
     {
-      "id": "3",
+      "id": 1,
       "name": "Zuraedit",
       "email": "Zura@gmail.com",
       "password": "1234",
       "role": "user"
     },
     {
-      "id": "QhMDMCL",
+      "id": 2,
       "name": "edited",
       "email": "hey@hai.ge",
       "password": "1233123",
       "role": "user"
     },
     {
-      "id": "Z5eqgmE",
+      "id": 3,
       "name": "register",
       "email": "reg@us.er",
       "password": "123123123",
       "role": "user"
     },
     {
-      "id": "cDFRXOl",
+      "id": 4,
       "name": "yes",
       "email": "yea@gmail.com",
       "password": "1232",
+      "role": "user"
+    },
+    {
+      "id": 5,
+      "name": "new one",
+      "email": "new@gmail.com",
+      "password": "1231",
+      "role": "user"
+    },
+    {
+      "id": 6,
+      "name": "test",
+      "email": "test@gmail.com",
+      "password": "1231",
+      "role": "user"
+    },
+    {
+      "id": 7,
+      "name": "number?",
+      "email": "numb@id.com",
+      "password": "vau123",
       "role": "user"
     }
   ]

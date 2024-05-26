@@ -1,6 +1,8 @@
 //? todo: theme.scss
 @import 'assets/variable';
 
+
+
 /* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;
@@ -26,6 +28,7 @@ a:active {
   color: $link_active;
 }
 
+// flex
 .f-row {
   display: flex;
   flex-flow: row wrap;
@@ -46,6 +49,7 @@ a:active {
   }
 }
 
+// grid
 .grid-wrapper {
   display: grid;
   place-items: center;
@@ -56,6 +60,7 @@ a:active {
   height: 100%;
 }
 
+// form
 .form-wrapper {
   width: 400px;
   border: 2px solid black;
@@ -64,4 +69,15 @@ a:active {
   .form__header {
     margin-bottom: 20px;
   }
+}
+
+// table
+.mat-sort-header-container {
+  justify-content: center;
+  position: relative;
+  left: 8px;
+}
+
+.id-col .mat-sort-header-container {
+  justify-content: start;
 }
