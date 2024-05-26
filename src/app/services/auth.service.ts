@@ -13,7 +13,7 @@ export class AuthService {
 
   // Simulate login request
   login(email: string, password: string): Observable<User[] | null> {
-    return this.userService.getUserByCode('email', email);
+    return this.userService.getUserByCode('email', email, 'password', password);
   }
 
   // Logout
