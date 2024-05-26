@@ -2,3 +2,4 @@
 
 $link: map-get($UserManagement-primary, 'default');
 $link_active: map-get($UserManagement-primary, 200);
+$snackbar_warn: map-get($UserManagement-warn, 700)

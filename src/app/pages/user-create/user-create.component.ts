@@ -7,6 +7,7 @@ import { BtnComponent } from "../../components/btn/btn.component";
 import { FormComponent } from "../../components/form/form.component";
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
+import { MatSnackBar } from '@angular/material/snack-bar'
 
 @Component({
   selector: 'app-user-create',
@@ -19,7 +20,7 @@ import { UserService } from '../../services/user.service';
     AsyncPipe,
     FormComponent,
     BtnComponent,
-    RouterLink
+    RouterLink,
   ]
 })
 export class UserCreateComponent implements OnDestroy {
@@ -27,7 +28,8 @@ export class UserCreateComponent implements OnDestroy {
   router = inject(Router)
   route = inject(ActivatedRoute)
   userService = inject(UserService)
-  errorMessage: string = '';
+  snackbar = inject(MatSnackBar)
+  alertMessage: string = '';
 
   userForm: FormGroup = new FormGroup({
     id: new FormControl<string>(''),
@@ -49,7 +51,8 @@ export class UserCreateComponent implements OnDestroy {
           }),
           catchError(err => {
             if (err.status === 404) {
-              console.warn('useri ver moidzebna');
+              this.alertMessage = 'user not found',
+                this.snackbar.open(this.alertMessage, 'dismiss', { duration: 2000 })
               this.router.navigateByUrl(''); // Navigate to another page for invalid ID
             }
             return of(null); // Continue the stream with null
@@ -58,23 +61,26 @@ export class UserCreateComponent implements OnDestroy {
     )
   );
 
-  registerUser() {
+  submit() {
+    this.userForm.markAllAsTouched();
     if (this.userForm.invalid) {
-      this.errorMessage = 'invalid form!'
-      console.log(this.errorMessage, this.userForm.value);
+      this.alertMessage = 'invalid form!'
+      this.snackbar.open(this.alertMessage, 'dismiss', { duration: 2000 })
       return;
     };
 
     const userObj = this.userForm.getRawValue();
     const id = this.userForm.get('id')?.value;
     if (id) {
-      console.log('id gvaq!', id);
+      this.alertMessage = 'User edited'
+      this.snackbar.open(this.alertMessage, '', { duration: 1000 })
       this.userService.updateUser(userObj)
         .pipe(takeUntil(this.unSubscriber))
         .subscribe(() => this.router.navigate(['']));
     }
     else {
-      console.log('id ar gvaq!', id);
+      this.alertMessage = 'User created'
+      this.snackbar.open(this.alertMessage, '', { duration: 1000 })
       this.userService.createUser(userObj)
         .pipe(takeUntil(this.unSubscriber))
         .subscribe(() => this.router.navigate(['']));

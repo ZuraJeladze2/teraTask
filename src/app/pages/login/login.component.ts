@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { BtnComponent } from "../../components/btn/btn.component";
 import { AuthService } from '../../services/auth.service';
 import { Subject, map, of, switchMap, takeUntil } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-login',
@@ -15,8 +16,9 @@ import { Subject, map, of, switchMap, takeUntil } from 'rxjs';
 })
 export class LoginComponent implements OnDestroy {
     authService = inject(AuthService)
-    errorMessage: string = '';
+    alertMessage: string = '';
     router = inject(Router)
+    snackbar = inject(MatSnackBar)
     private unSubscriber: Subject<void> = new Subject<void>();
 
     userForm: FormGroup = new FormGroup({
@@ -28,6 +30,7 @@ export class LoginComponent implements OnDestroy {
 
 
     login() {
+        this.userForm.markAllAsTouched();
         if (this.userForm.valid) {
             const email = this.userForm.get('email')?.value
             const password = this.userForm.get('password')?.value
@@ -47,26 +50,21 @@ export class LoginComponent implements OnDestroy {
                     })
                 )
                 .subscribe(x => {
-                    console.log('authenticated', x);
                     if (x?.role === 'admin') {
                         this.router.navigateByUrl('');
-                        console.log('admin');
                     }
                     else if (x?.role === 'user') {
                         this.router.navigate(['view', x?.id])
-                        console.log('user');
-
                     }
                     else {
-                        console.log('vaa if else ar mushaobs');
-
+                        this.snackbar.open('invalid credentials', 'Okay', { duration: 2500 })
                     }
                 })
         }
         else {
-            this.errorMessage = 'invalid login form!'
-            console.warn(this.errorMessage);
-
+            this.alertMessage = 'invalid login form!'
+            console.warn(this.alertMessage);
+            this.snackbar.open(this.alertMessage, 'dismiss',)
         }
     }
 

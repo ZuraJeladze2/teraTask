@@ -2,7 +2,7 @@
   "users": [
     {
       "id": 1,
-      "name": "Zuraedit",
+      "name": "Zura B-)",
       "email": "Zura@gmail.com",
       "password": "1234",
       "role": "user"
@@ -47,6 +47,13 @@
       "name": "number?",
       "email": "numb@id.com",
       "password": "vau123",
+      "role": "user"
+    },
+    {
+      "id": 8,
+      "name": "asd",
+      "email": "qwe@asd",
+      "password": "asdawq",
       "role": "user"
     }
   ]
