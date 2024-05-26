@@ -10,12 +10,12 @@ export class AuthService {
   currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
 
   // Simulate login request
-  login(email: string, password: string): Observable<boolean> {
+  login(email: string, password: string): Observable<User | boolean> {
     //! hardcoded authorisation!
     // Assuming login is successful if email and password match.
     const isAuthenticated = email === 'admin@gmail.com' && password === 'admin';
     return of(isAuthenticated).pipe(
-      tap(authenticated => {
+      map(authenticated => {
         if (authenticated) {
           const user: User = {
             name: 'admin',
@@ -24,6 +24,11 @@ export class AuthService {
             role: 'admin'
           };
           this.setCurrentUser(user);
+          console.log(this.currentUser$);
+          return this.currentUser$;
+        }
+        else{
+          return false;
         }
       }),
       catchError(err => {
