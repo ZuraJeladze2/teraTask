@@ -33,10 +33,10 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/users/${id}`);
   }
 
-  getUserByCode(field: string, value: string): Observable<User[] | null> {
+  getUserByCode(field1: string, value1: string, field2: string, value2: string): Observable<User[] | null> {
     return this.http.get(`${this.apiUrl}/users`, {
       params: {
-        [field]: value
+        [field1]: value1, [field2]: value2
       }
     }) as Observable<User[] | null>
   }
