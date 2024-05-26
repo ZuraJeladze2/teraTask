@@ -33,7 +33,14 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/users/${id}`);
   }
 
-  
+  getUserByCode(field: string, value: string): Observable<User[] | null> {
+    return this.http.get(`${this.apiUrl}/users`, {
+      params: {
+        [field]: value
+      }
+    }) as Observable<User[] | null>
+  }
+
 
   createUser(user: Partial<User>): Observable<User> {
     return this.http.post<User>(`${this.apiUrl}/users`, user, {

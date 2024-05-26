@@ -4,7 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BtnComponent } from "../../components/btn/btn.component";
 import { AuthService } from '../../services/auth.service';
-import { Subject, of, switchMap, takeUntil } from 'rxjs';
+import { Subject, map, of, switchMap, takeUntil } from 'rxjs';
 
 @Component({
     selector: 'app-login',
@@ -34,18 +34,32 @@ export class LoginComponent implements OnDestroy {
             this.authService.login(email, password)
                 .pipe(
                     takeUntil(this.unSubscriber),
+                    map(users => users ? users[0] : null),
                     switchMap(x => {
-                        console.log(x)
+                        console.warn(x)
+                        if (x) this.authService.setCurrentUser(x)
+                        console.log(this.authService.currentUser$);
+
                         return this.authService.currentUser$
+                    }),
+                    map(users => {
+                        return users
                     })
                 )
                 .subscribe(x => {
                     console.log('authenticated', x);
                     if (x?.role === 'admin') {
                         this.router.navigateByUrl('');
+                        console.log('admin');
                     }
-                    else if(x?.role === 'user'){
+                    else if (x?.role === 'user') {
                         this.router.navigate(['view', x?.id])
+                        console.log('user');
+
+                    }
+                    else {
+                        console.log('vaa if else ar mushaobs');
+
                     }
                 })
         }
