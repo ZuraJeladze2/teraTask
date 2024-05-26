@@ -6,13 +6,13 @@
             <app-form [form]="userForm" state="edit"></app-form>
             <div class="f-row btn-wrapper">
                 <app-btn routerLink="">Cancel</app-btn>
-                <app-btn color="primary" (click)="registerUser()">Save</app-btn>
+                <app-btn color="primary" (click)="submit()">Save</app-btn>
             </div>
             }
             @else {
             <h2 class="form__header">Register User</h2>
             <app-form [form]="userForm" state="register"></app-form>
-            <app-btn color="primary" (click)="registerUser()">Register</app-btn>
+            <app-btn color="primary" (click)="submit()">Register</app-btn>
             }
         </ng-container>
     </div>
