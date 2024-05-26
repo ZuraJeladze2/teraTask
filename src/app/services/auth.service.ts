@@ -1,41 +1,19 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, map, of, tap } from 'rxjs';
 import { User } from '../interfaces/user.interface';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
+  userService = inject(UserService)
 
   // Simulate login request
-  login(email: string, password: string): Observable<User | boolean> {
-    //! hardcoded authorisation!
-    // Assuming login is successful if email and password match.
-    const isAuthenticated = email === 'admin@gmail.com' && password === 'admin';
-    return of(isAuthenticated).pipe(
-      map(authenticated => {
-        if (authenticated) {
-          const user: User = {
-            name: 'admin',
-            id: 'noId',
-            email: email,
-            role: 'admin'
-          };
-          this.setCurrentUser(user);
-          console.log(this.currentUser$);
-          return this.currentUser$;
-        }
-        else{
-          return false;
-        }
-      }),
-      catchError(err => {
-        console.error('Error during login:', err);
-        return of(err);
-      })
-    );
+  login(email: string, password: string): Observable<User[] | null> {
+    return this.userService.getUserByCode('email', email);
   }
 
   // Logout
@@ -52,7 +30,7 @@ export class AuthService {
   // }
 
   // Set current user
-  private setCurrentUser(user: User): void {
+  setCurrentUser(user: User): void {
     this.currentUserSubject.next(user);
   }
 
