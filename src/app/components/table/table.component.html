@@ -1,34 +1,34 @@
 <div class="mat-elevation-z8 table-wrapper">
-    <table mat-table [dataSource]="dataSource">
+    <table mat-table [dataSource]="dataSource" matSort>
 
         <!-- id Column -->
         <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef class="id-col"> # </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header class="id-col"> # </th>
             <td mat-cell *matCellDef="let element" class="id-col"> {{element.id}} </td>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Name </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
             <td mat-cell *matCellDef="let element"><a [routerLink]="['view', element.id]"> {{element.name}} </a>
             </td>
         </ng-container>
 
         <!-- email Column -->
         <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> E-mail </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </th>
             <td mat-cell *matCellDef="let element"> {{element.email}} </td>
         </ng-container>
 
         <!-- role Column -->
         <ng-container matColumnDef="role">
-            <th mat-header-cell *matHeaderCellDef> Role </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
             <td mat-cell *matCellDef="let element"> {{element.role}} </td>
         </ng-container>
 
         <!-- actions Column -->
         <ng-container matColumnDef="actions">
-            <th mat-header-cell *matHeaderCellDef> Actions </th>
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
             <td mat-cell *matCellDef="let element" class="f-row c">
                 <app-icon color="primary" name="perm_identity" [routerLink]="['view', element.id]"></app-icon>
                 <app-icon color="primary" name="edit" [routerLink]="['create', element.id]"></app-icon>

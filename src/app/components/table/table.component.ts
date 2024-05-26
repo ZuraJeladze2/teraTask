@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { BtnComponent } from '../btn/btn.component';
 import { CardComponent } from '../card/card.component';
 import { IconComponent } from "../icon/icon.component";
+import { MatSort, MatSortModule } from '@angular/material/sort';
 
 @Component({
   selector: 'app-table',
@@ -21,14 +22,15 @@ import { IconComponent } from "../icon/icon.component";
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe, RouterLink,
-    MatTableModule, MatPaginatorModule,
+    MatTableModule, MatPaginatorModule, MatSortModule, MatSort,
     BtnComponent, IconComponent
   ]
 })
-export class TableComponent implements OnInit, OnDestroy {
+export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   usersServ = inject(UserService)
   @Input() users$: Observable<User[]> = new Observable<User[]>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
   dataSource = new MatTableDataSource<User>();
   private unSubscriber = new Subject<void>();
@@ -41,7 +43,14 @@ export class TableComponent implements OnInit, OnDestroy {
       .subscribe(users => {
         this.dataSource.data = users
         this.dataSource.paginator = this.paginator; // Reassign paginator after data update
+        this.dataSource.sort = this.sort;
+
       });
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 
   deleteUser(id: string) {
