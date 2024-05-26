@@ -13,7 +13,7 @@ export class UserService {
   users$ = this.usersSubject.asObservable();
   private apiUrl = environment.apiUrl;
   private http = inject(HttpClient);
-  private headers = new HttpHeaders({
+  private headers = new HttpHeaders({ //? yvelas xoar chavusva?
     'Content-Type': 'application/json'
   });
 
