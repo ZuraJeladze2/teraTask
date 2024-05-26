@@ -1,3 +1,8 @@
+@if(btn){
 <button mat-mini-fab [color]="color">
     <mat-icon> {{ name }} </mat-icon>
 </button>
+}
+@else {
+<mat-icon [color]="color"> {{ name }} </mat-icon>
+}

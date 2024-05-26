@@ -1,0 +1,13 @@
+:host {
+    height: 48px;
+    display: grid;
+    place-items: center;
+}
+
+mat-icon{
+    transform-origin: center center;
+}
+
+mat-icon:hover {
+    scale: 1.12;
+}
