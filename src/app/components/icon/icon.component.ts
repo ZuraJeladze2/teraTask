@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, booleanAttribute } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -12,4 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 export class IconComponent {
   @Input() name: string = '';
   @Input() color: string = '';
+  @Input({
+    transform: booleanAttribute
+  }) btn: boolean = false
 }

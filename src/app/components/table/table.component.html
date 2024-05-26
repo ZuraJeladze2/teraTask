@@ -30,8 +30,8 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
             <td mat-cell *matCellDef="let element" class="f-row c">
-                <app-icon color="primary" name="perm_identity" [routerLink]="['view', element.id]"></app-icon>
-                <app-icon color="primary" name="edit" [routerLink]="['create', element.id]"></app-icon>
+                <app-icon name="perm_identity" [routerLink]="['view', element.id]"></app-icon>
+                <app-icon name="edit" [routerLink]="['create', element.id]"></app-icon>
                 <app-icon color="warn" name="delete"></app-icon>
             </td>
         </ng-container>
