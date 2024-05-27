@@ -1,0 +1,17 @@
+<mat-sidenav-container class="overlay">
+    <mat-sidenav mode="over" position="end" #nav>
+      <h3>sidenav contents here</h3>      
+      <h3>sidenav contents here</h3>      
+      <h3>sidenav contents here</h3>      
+    </mat-sidenav>
+    <mat-sidenav-content style="height: 100vh;">
+    <mat-toolbar>
+  <span>My App</span>
+
+  <span class="example-spacer"></span>
+  <app-icon btn name="menu" (click)="nav.toggle()"/>
+</mat-toolbar>
+      <router-outlet/>
+  </mat-sidenav-content>
+  
+</mat-sidenav-container>

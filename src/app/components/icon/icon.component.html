@@ -1,4 +1,9 @@
 @if(btn){
+<app-btn [color]="color">
+    <mat-icon> {{ name }} </mat-icon>
+</app-btn>
+}
+@else if(fab){
 <button mat-mini-fab [color]="color">
     <mat-icon> {{ name }} </mat-icon>
 </button>

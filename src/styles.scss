@@ -71,6 +71,12 @@ a:active {
 }
 
 // table
+table {
+  
+  mat-icon:hover {
+    scale: 1.12;
+}
+}
 .mat-sort-header-container {
   justify-content: center;
   position: relative;
