@@ -5,17 +5,19 @@
         <h3>sidenav contents here</h3>
     </mat-sidenav>
     <mat-sidenav-content style="height: 100vh;">
-        <mat-toolbar>
+        <mat-toolbar class="fixed-nav">
             <span>Tera User Management</span>
 
             <span class="example-spacer"></span>
             <div class="f-row">
                 @if(currentUser$ | async; as user){
                 @if(user.role === 'admin'){
+                <span> {{user.name}} (Admin) </span>
                 <app-icon btn name="menu" (click)="nav.toggle()" />
                 }
-                <app-icon fab name="person" />
-                <span> {{user.name}} </span>
+                @else {
+                <span> {{user.name}} (User) </span>
+                }
                 }
             </div>
         </mat-toolbar>

@@ -2,11 +2,12 @@ import { Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule],
+  imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule],
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss'
 })

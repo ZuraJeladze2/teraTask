@@ -32,7 +32,7 @@ export class UserCreateComponent implements OnDestroy {
   alertMessage: string = '';
 
   userForm: FormGroup = new FormGroup({
-    id: new FormControl<string>(''),
+    id: new FormControl<string>(''), //json serveri agenerirebs
     name: new FormControl<string>('', [Validators.required, Validators.minLength(2)]),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
     password: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
@@ -45,14 +45,11 @@ export class UserCreateComponent implements OnDestroy {
         ? of(null)
         : this.userService.getUser(params['id']).pipe(
           tap(user => {
-            // Logic for successfully fetched user
             this.userForm.patchValue(user);
-            console.log('edit user:', user);
           }),
           catchError(err => {
             if (err.status === 404) {
-              this.alertMessage = 'user not found',
-                this.snackbar.open(this.alertMessage, 'dismiss', { duration: 2000 })
+              this.snackbar.open(this.alertMessage, 'dismiss', { duration: 2000 })
               this.router.navigateByUrl(''); // Navigate to another page for invalid ID
             }
             return of(null); // Continue the stream with null

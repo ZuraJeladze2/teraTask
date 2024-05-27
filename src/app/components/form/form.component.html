@@ -1,9 +1,9 @@
 <form [formGroup]="form" class="form grid-wrapper">
     @if(state === 'register' || state === 'edit'){
-        <mat-form-field class="form__field" appearance="outline">
-            <mat-label>Name</mat-label>
-            <input matInput stroke type="text" formControlName="name">
-        </mat-form-field>
+    <mat-form-field class="form__field" appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput stroke type="text" formControlName="name">
+    </mat-form-field>
     }
 
     <mat-form-field class="form__field" appearance="outline">
@@ -17,10 +17,13 @@
     </mat-form-field>
 
     @if(state === 'edit'){
-        <mat-form-field class="form__field" appearance="outline">
-            <mat-label>Role</mat-label>
-            <input matInput stroke type="role" formControlName="role">
-        </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+            <mat-option value="user">User</mat-option>
+            <mat-option value="admin">Admin</mat-option>
+        </mat-select>
+    </mat-form-field>
     }
-    
+
 </form>
