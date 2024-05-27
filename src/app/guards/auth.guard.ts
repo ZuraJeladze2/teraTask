@@ -16,14 +16,16 @@ export const authGuard: CanActivateFn = (route, state) => {
       return true; //admins yvelaferze true
     }
     else {
-      console.log(isLoggedIn);
       if (state.url.includes('create/')) {
         snackbar.open('Only admin can edit users', '', { duration: 2000 })
       }
       else if (state.url.includes('view/')) {
         snackbar.open('Only admin can view profiles', '', { duration: 2000 })
       }
-      router.navigateByUrl('')
+      else if(state.url === '/'){
+        return true;
+      }
+      // router.navigateByUrl('')
       return false;
     }
   }

@@ -34,7 +34,7 @@ export class AuthService {
   }
 
   isAdmin() {
-    return !!this.currentUserSubject.value?.role;
+    return this.currentUserSubject.value?.role === 'admin';
   }
 
 
@@ -77,7 +77,6 @@ export class AuthService {
         }
       } else if (currentUser) {
         this.currentUserSubject.next(null);
-        
       }
     });
   }

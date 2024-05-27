@@ -13,6 +13,7 @@ import { BtnComponent } from '../btn/btn.component';
 import { CardComponent } from '../card/card.component';
 import { IconComponent } from "../icon/icon.component";
 import { MatSort, MatSortModule } from '@angular/material/sort';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-table',
@@ -27,11 +28,13 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
   ]
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
-  usersServ = inject(UserService)
+  usersServ = inject(UserService);
+  authServ = inject(AuthService)
+  isAdmin = this.authServ.isAdmin();
   @Input() users$: Observable<User[]> = new Observable<User[]>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  displayedColumns: string[] = ['id', 'name', 'email', 'role', 'actions'];
+  displayedColumns: string[] = this.isAdmin ? ['id', 'name', 'email', 'role', 'actions'] : ['id', 'name', 'email'];
   dataSource = new MatTableDataSource<User>();
   private unSubscriber = new Subject<void>();
 
@@ -44,7 +47,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
         this.dataSource.data = users
         this.dataSource.paginator = this.paginator; // Reassign paginator after data update
         this.dataSource.sort = this.sort;
-
       });
   }
 

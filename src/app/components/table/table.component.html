@@ -20,6 +20,7 @@
             <td mat-cell *matCellDef="let element"> {{element.email}} </td>
         </ng-container>
 
+        @if(isAdmin){
         <!-- role Column -->
         <ng-container matColumnDef="role">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Role </th>
@@ -35,6 +36,7 @@
                 <app-icon color="warn" name="delete" (click)="deleteUser(element.id)"></app-icon>
             </td>
         </ng-container>
+        }
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -43,3 +45,5 @@
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of users list">
     </mat-paginator>
 </div>
+<!-- role Column -->
+<!-- actions Column -->
