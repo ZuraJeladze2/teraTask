@@ -11,6 +11,12 @@ export class AuthService {
   currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
   userService = inject(UserService)
 
+
+  constructor() {
+    this.loadUserFromLocalStorage();
+  }
+
+
   // Simulate login request
   login(email: string, password: string): Observable<User[] | null> {
     return this.userService.getUserByCode('email', email, 'password', password);
@@ -32,15 +38,33 @@ export class AuthService {
   // Set current user
   setCurrentUser(user: User): void {
     this.currentUserSubject.next(user);
+    this.saveUserToLocalStorage(user);
   }
 
   // Clear current user
   private clearCurrentUser(): void {
     this.currentUserSubject.next(null);
+    this.removeUserFromLocalStorage();
   }
 
 
-  isAdmin(){
+  isAdmin() {
     return !!this.currentUserSubject.value?.role;
+  }
+
+
+  private saveUserToLocalStorage(user: User): void {
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    }
+  }
+  private removeUserFromLocalStorage() {
+    localStorage.removeItem('currentUser');
+  }
+  private loadUserFromLocalStorage(): void {
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      this.currentUserSubject.next(JSON.parse(storedUser));
+    }
   }
 }
