@@ -4,10 +4,8 @@
     place-items: center;
 }
 
-mat-icon{
+mat-icon {
     transform-origin: center center;
-}
-
-mat-icon:hover {
-    scale: 1.12;
+    cursor: pointer;
+    display: grid;
 }
