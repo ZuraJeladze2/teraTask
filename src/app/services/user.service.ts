@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { User } from '../interfaces/user.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
+import { UserStateService } from './user-state.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class UserService {
   private usersSubject = new BehaviorSubject<User[]>([]);
   users$ = this.usersSubject.asObservable();
   private apiUrl = environment.apiUrl;
+  private userStateService = inject(UserStateService)
   private http = inject(HttpClient);
   private headers = new HttpHeaders({ //? yvelas xoar chavusva?
     'Content-Type': 'application/json'
@@ -54,7 +56,13 @@ export class UserService {
     return this.http.put<User>(`${this.apiUrl}/users/${user.id}`, user, {
       headers: this.headers               //? json-serveris dokumentaciis mixedvit, tore isec mushaobs.
     }).pipe(
-      tap(() => this.loadUsers())
+      tap((updatedUser) => {
+        this.loadUsers();
+        const currentUser = this.userStateService.getCurrentUser();
+        if (currentUser && currentUser.id === updatedUser.id) {
+          this.userStateService.setCurrentUser(updatedUser);
+        }
+      })
     );
   }
 

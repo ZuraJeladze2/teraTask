@@ -6,6 +6,7 @@ import { BtnComponent } from "../../components/btn/btn.component";
 import { AuthService } from '../../services/auth.service';
 import { Subject, map, of, switchMap, takeUntil } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserStateService } from '../../services/user-state.service';
 
 @Component({
     selector: 'app-login',
@@ -16,6 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class LoginComponent implements OnDestroy {
     authService = inject(AuthService)
+    userStateService = inject(UserStateService)
     alertMessage: string = '';
     router = inject(Router)
     snackbar = inject(MatSnackBar)
@@ -40,10 +42,10 @@ export class LoginComponent implements OnDestroy {
                     map(users => users ? users[0] : null),
                     switchMap(x => {
                         console.warn(x)
-                        if (x) this.authService.setCurrentUser(x)
-                        console.log(this.authService.currentUser$);
+                        if (x) this.userStateService.setCurrentUser(x)
+                        console.log(this.userStateService.currentUser$);
 
-                        return this.authService.currentUser$
+                        return this.userStateService.currentUser$
                     }),
                     map(users => {
                         return users
