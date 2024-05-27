@@ -8,6 +8,8 @@ import { RouterOutlet } from '@angular/router';
 import { BtnComponent } from "./components/btn/btn.component";
 import { IconComponent } from "./components/icon/icon.component";
 import { AuthService } from './services/auth.service';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { UserStateService } from './services/user-state.service';
 
 @Component({
   selector: 'app-root',
@@ -15,20 +17,14 @@ import { AuthService } from './services/auth.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   imports: [
-    RouterOutlet,
+    RouterOutlet, AsyncPipe, NgIf,
     MatSidenavModule, MatInputModule, MatIconModule, MatButtonModule, MatToolbarModule, MatDrawer,
     BtnComponent, IconComponent
   ]
 })
 export class AppComponent {
   title = 'UserManagement';
-  authService = inject(AuthService)
-  currentUser$ = this.authService.currentUser$;
+  userStateService = inject(UserStateService)
+  currentUser$ = this.userStateService.currentUser$;
 
-  ngOnInit() {
-    this.currentUser$.subscribe(x => {
-      console.log('current user is ', x);
-
-    })
-  }
 }
