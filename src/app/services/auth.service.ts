@@ -14,8 +14,8 @@ export class AuthService {
 
   constructor() {
     this.loadUserFromLocalStorage();
+    this.syncLocalStorageWithBehaviorSubject();
   }
-
 
   // Simulate login request
   login(email: string, password: string): Observable<User[] | null> {
@@ -29,11 +29,14 @@ export class AuthService {
 
   // Check if user is logged in
   // ? ar mhcirdeba, imitoro role-s ver davadgen booleanit. BehaviorSubject minda
-  // isLoggedIn(): Observable<boolean> {
-  //   return this.currentUser$.pipe(
-  //     map(user => !!user)
-  //   );
-  // }
+  isLoggedIn(): boolean {
+    return !!this.currentUserSubject.value;
+  }
+
+  isAdmin() {
+    return !!this.currentUserSubject.value?.role;
+  }
+
 
   // Set current user
   setCurrentUser(user: User): void {
@@ -46,12 +49,6 @@ export class AuthService {
     this.currentUserSubject.next(null);
     this.removeUserFromLocalStorage();
   }
-
-
-  isAdmin() {
-    return !!this.currentUserSubject.value?.role;
-  }
-
 
   private saveUserToLocalStorage(user: User): void {
     if (user) {
@@ -66,5 +63,22 @@ export class AuthService {
     if (storedUser) {
       this.currentUserSubject.next(JSON.parse(storedUser));
     }
+  }
+
+  // Sync localStorage with BehaviorSubject. if someone deleted manually from localstorage
+  private syncLocalStorageWithBehaviorSubject(): void {
+    window.addEventListener('storage', () => {
+      const storedUser = localStorage.getItem('currentUser');
+      const currentUser = this.currentUserSubject.value;
+      if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        if (!currentUser || (currentUser && currentUser.id !== parsedUser.id)) {
+          this.currentUserSubject.next(parsedUser);
+        }
+      } else if (currentUser) {
+        this.currentUserSubject.next(null);
+        
+      }
+    });
   }
 }
