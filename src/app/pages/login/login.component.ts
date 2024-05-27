@@ -58,6 +58,7 @@ export class LoginComponent implements OnDestroy {
                     }
                     else {
                         this.snackbar.open('invalid credentials', 'Okay', { duration: 2500 })
+                        this.router.navigate(['login']); // tu localstoragedan washli currentUsers
                     }
                 })
         }

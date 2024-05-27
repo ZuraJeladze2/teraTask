@@ -3,12 +3,13 @@ import { UserCreateComponent } from './pages/user-create/user-create.component';
 import { UserDetailedComponent } from './pages/user-detailed/user-detailed.component';
 import { UsersComponent } from './pages/users/users.component';
 import { LoginComponent } from './pages/login/login.component';
-import { roleGuard } from './guards/role.guard';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
       path: '',
-      component: UsersComponent
+      component: UsersComponent,
+      canActivate: [authGuard]
     },
     {
       path: 'create',
@@ -21,12 +22,12 @@ export const routes: Routes = [
     {
       path: 'create/:id',
       component: UserCreateComponent,
-      canActivate: [roleGuard]
+      canActivate: [authGuard]
     },
     {
       path: 'view/:id',
       component: UserDetailedComponent,
-      canActivate: [roleGuard]
+      canActivate: [authGuard]
     },
     {
       path: '**',
