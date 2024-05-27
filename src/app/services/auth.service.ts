@@ -38,4 +38,9 @@ export class AuthService {
   private clearCurrentUser(): void {
     this.currentUserSubject.next(null);
   }
+
+
+  isAdmin(){
+    return !!this.currentUserSubject.value?.role;
+  }
 }
