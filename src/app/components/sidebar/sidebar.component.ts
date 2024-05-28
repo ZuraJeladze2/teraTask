@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, Output, inject } from '@angular/core';
 import { FormComponent } from "../form/form.component";
 import { BtnComponent } from '../btn/btn.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -6,18 +6,22 @@ import { Subject, takeUntil } from 'rxjs';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
+import { MatTabsModule } from '@angular/material/tabs';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
-  imports: [FormComponent, BtnComponent, MatSnackBarModule]
+  imports: [FormComponent, BtnComponent, MatSnackBarModule, MatTabsModule]
 })
 export class SidebarComponent implements OnDestroy {
+  authService = inject(AuthService)
   snackbar = inject(MatSnackBar)
   router: Router = inject(Router);
   userService = inject(UserService);
+  @Output() logoutEvent: EventEmitter<any> = new EventEmitter();
   private unSubscriber: Subject<void> = new Subject<void>();
 
   userForm: FormGroup = new FormGroup({
@@ -42,6 +46,11 @@ export class SidebarComponent implements OnDestroy {
         this.snackbar.open('User added', '', { duration: 1000 })
         this.userForm.reset();
       });
+  }
+
+  logout() {
+    this.logoutEvent.emit(null)
+    this.authService.logout();
   }
 
   ngOnDestroy(): void {
