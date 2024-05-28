@@ -1,19 +1,16 @@
-import { Component, Input, ViewChild, AfterViewInit, OnDestroy, ChangeDetectionStrategy, inject, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { RouterLink } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from '../../interfaces/user.interface';
+import { UserStateService } from '../../services/user-state.service';
 import { UserService } from '../../services/user.service';
-import { RouterLink } from '@angular/router';
-import { MatIcon } from '@angular/material/icon';
-import { AsyncPipe, NgIf } from '@angular/common';
-import { MatButtonModule } from '@angular/material/button';
 import { BtnComponent } from '../btn/btn.component';
-import { CardComponent } from '../card/card.component';
 import { IconComponent } from "../icon/icon.component";
-import { MatSort, MatSortModule } from '@angular/material/sort';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-table',
@@ -29,8 +26,8 @@ import { AuthService } from '../../services/auth.service';
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   usersServ = inject(UserService);
-  authServ = inject(AuthService)
-  isAdmin = this.authServ.isAdmin();
+  userStateServ = inject(UserStateService)
+  isAdmin = this.userStateServ.isAdmin();
   @Input() users$: Observable<User[]> = new Observable<User[]>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

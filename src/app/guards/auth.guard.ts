@@ -2,14 +2,15 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserStateService } from '../services/user-state.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const snackbar = inject(MatSnackBar)
-  const authService = inject(AuthService);
+  const userStateService = inject(UserStateService);
   const router = inject(Router);
-  const isLoggedIn = authService.isLoggedIn();
-  const isAdmin = authService.isAdmin();
-
+  const isLoggedIn = userStateService.isLoggedIn();
+  const isAdmin = userStateService.isAdmin();
+  const userId = userStateService.getUserId()
 
   if (isLoggedIn) {
     if (isAdmin) {
@@ -20,9 +21,14 @@ export const authGuard: CanActivateFn = (route, state) => {
         snackbar.open('Only admin can edit users', '', { duration: 2000 })
       }
       else if (state.url.includes('view/')) {
-        snackbar.open('Only admin can view profiles', '', { duration: 2000 })
+        if (state.url.includes(`view/${userId}`)) {
+          return true
+        }
+        else {
+          snackbar.open('Only admin can view profiles', '', { duration: 2000 })
+        }
       }
-      else if(state.url === '/'){
+      else if (state.url === '/') {
         return true;
       }
       // router.navigateByUrl('')
