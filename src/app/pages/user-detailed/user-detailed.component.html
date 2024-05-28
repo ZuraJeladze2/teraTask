@@ -1,3 +1,5 @@
-@if(user$ | async; as user){
-<app-card [user]="user"></app-card>
-}
+<div class="overlay grid-wrapper">
+    @if(user$ | async; as user){
+        <app-card [user]="user" class="detailed-card"></app-card>
+        }
+</div>

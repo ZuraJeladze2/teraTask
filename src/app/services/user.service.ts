@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { User } from '../interfaces/user.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -18,6 +18,21 @@ export class UserService {
   private headers = new HttpHeaders({ //? yvelas xoar chavusva?
     'Content-Type': 'application/json'
   });
+  tableViewSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true)
+  tableView$: Observable<boolean> = this.tableViewSubject.asObservable();
+
+  tableViewOn(): void {
+    this.tableViewSubject.next(true)
+    localStorage.setItem('tableView', 'true')
+  }
+  tableViewOff(): void {
+    this.tableViewSubject.next(false)
+    localStorage.removeItem('tableView')
+  }
+  getTableView(): Observable<boolean> {
+    this.tableViewSubject.next(!!localStorage.getItem('tableView'))
+    return this.tableView$;
+  }
 
   constructor() {
     this.loadUsers();
@@ -71,4 +86,5 @@ export class UserService {
       tap(() => this.loadUsers())
     );
   }
+
 }

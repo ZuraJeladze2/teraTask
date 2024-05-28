@@ -1,5 +1,5 @@
 <div class="grid-wrapper overlay">
-    @if(tableView){
+    @if(getTableView | async){
     <app-table [users$]="users$"></app-table>
     }
     @else {
