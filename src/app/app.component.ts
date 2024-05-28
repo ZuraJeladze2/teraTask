@@ -4,7 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatDrawer, MatSidenav, MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { BtnComponent } from "./components/btn/btn.component";
 import { IconComponent } from "./components/icon/icon.component";
 import { AuthService } from './services/auth.service';
@@ -18,7 +18,7 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
   imports: [
-    RouterOutlet, AsyncPipe, NgIf,
+    RouterOutlet, AsyncPipe, NgIf, RouterLink,
     MatSidenavModule, MatSidenav, MatInputModule, MatIconModule, MatButtonModule, MatToolbarModule, MatDrawer,
     BtnComponent, IconComponent,
     SidebarComponent

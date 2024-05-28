@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:active {
+    color: $link_active;
+}
+
+hr {
+    margin: 1em 0;
+}

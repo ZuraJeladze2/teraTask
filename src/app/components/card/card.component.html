@@ -12,7 +12,7 @@
     </mat-card-header>
     <mat-card-actions>
         @if(btnShow){
-        <app-btn color="primary" routerLink="">Go Back</app-btn>
+        <app-btn color="primary" routerLink="">Dashboard</app-btn>
         }
         @else {
         <app-btn [routerLink]="['/', 'view', user.id]">Detailed</app-btn>
