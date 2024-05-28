@@ -17,7 +17,12 @@ export const authGuard: CanActivateFn = (route, state) => {
     }
     else {
       if (state.url.includes('create/')) {
-        snackbar.open('Only admin can edit users', '', { duration: 2000 })
+        if (state.url.includes(`create/${userId}`)) {
+          return true
+        }
+        else {
+          snackbar.open('Only admin can edit users', '', { duration: 2000 })
+        }
       }
       else if (state.url.includes('view/')) {
         if (state.url.includes(`view/${userId}`)) {

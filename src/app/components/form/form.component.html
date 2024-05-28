@@ -16,7 +16,7 @@
         <input matInput stroke [type]="state === 'edit' ? 'text' : 'password'" formControlName="password">
     </mat-form-field>
 
-    @if(state === 'edit'){
+    @if(state === 'edit' && currentUserRole === 'admin'){
     <mat-form-field appearance="outline">
         <mat-label>Role</mat-label>
         <mat-select formControlName="role">
@@ -25,5 +25,4 @@
         </mat-select>
     </mat-form-field>
     }
-
 </form>

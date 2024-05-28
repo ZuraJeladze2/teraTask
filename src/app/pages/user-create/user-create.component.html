@@ -1,9 +1,9 @@
 <div class="grid-wrapper overlay">
     <div class="form-wrapper grid-wrapper">
         <ng-container>
-            @if(user$ | async){
+            @if(user$ | async; as user){
             <h2 class="form__header">Edit User</h2>
-            <app-form [form]="userForm" state="edit"></app-form>
+            <app-form [currentUserRole]="user.role" [form]="userForm" state="edit"></app-form>
             <div class="f-row btn-wrapper">
                 <app-btn routerLink="">Cancel</app-btn>
                 <app-btn color="primary" (click)="submit()">Save</app-btn>
