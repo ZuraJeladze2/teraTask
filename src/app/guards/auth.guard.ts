@@ -1,15 +1,15 @@
 import { inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CanActivateFn, Router } from '@angular/router';
-import { UserStateService } from '../services/user-state.service';
+import { UserStateFacade } from '../facades/user-state.facade';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const snackbar = inject(MatSnackBar)
-  const userStateService = inject(UserStateService);
+  const userStateFacade = inject(UserStateFacade);
   const router = inject(Router);
-  const isLoggedIn = userStateService.isLoggedIn();
-  const isAdmin = userStateService.isAdmin();
-  const userId = userStateService.getUserId()
+  const isLoggedIn = userStateFacade.isLoggedIn();
+  const isAdmin = userStateFacade.isAdmin();
+  const userId = userStateFacade.getUserId()
 
   if (isLoggedIn) {
     if (isAdmin) {
@@ -44,9 +44,3 @@ export const authGuard: CanActivateFn = (route, state) => {
   return false;
 
 };
-// if (currentUser && currentUser.role === expectedRole) {
-//   return true;
-// } else {
-//   router.navigate(['/login']);
-//   return false;
-// }
