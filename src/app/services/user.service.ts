@@ -1,18 +1,14 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { User } from '../interfaces/user.interface';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { UserStateService } from './user-state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-
   private apiUrl = environment.apiUrl;
-  private userStateService = inject(UserStateService)
   private http = inject(HttpClient);
 
   loadUsers() {
