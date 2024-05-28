@@ -1,15 +1,15 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { User } from '../interfaces/user.interface';
-import { UserStateService } from './user-state.service';
 import { UserService } from './user.service';
+import { UserStateFacade } from '../facades/user-state.facade';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   private userService = inject(UserService);
-  private userStateService = inject(UserStateService);
+  private userStateFacade = inject(UserStateFacade);
 
   constructor() {}
 
@@ -18,6 +18,6 @@ export class AuthService {
   }
 
   logout(): void {
-    this.userStateService.clearCurrentUser();
+    this.userStateFacade.clearCurrentUser();
   }
 }

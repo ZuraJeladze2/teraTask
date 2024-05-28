@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -8,6 +8,7 @@ import { FormComponent } from "../../components/form/form.component";
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar'
+import { UserStateFacade } from '../../facades/user-state.facade';
 
 @Component({
   selector: 'app-user-create',
@@ -16,6 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar'
   styleUrl: './user-create.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
+    JsonPipe,
     ReactiveFormsModule,
     AsyncPipe,
     FormComponent,
@@ -28,6 +30,7 @@ export class UserCreateComponent implements OnDestroy {
   router = inject(Router)
   route = inject(ActivatedRoute)
   userService = inject(UserService)
+  userStateFacade = inject(UserStateFacade)
   snackbar = inject(MatSnackBar)
   alertMessage: string = '';
 
@@ -46,6 +49,9 @@ export class UserCreateComponent implements OnDestroy {
         : this.userService.getUser(params['id']).pipe(
           tap(user => {
             this.userForm.patchValue(user);
+          }),
+          switchMap(() => {
+            return this.userStateFacade.currentUser$
           }),
           catchError(err => {
             if (err.status === 404) {

@@ -9,8 +9,8 @@ import { BtnComponent } from "./components/btn/btn.component";
 import { IconComponent } from "./components/icon/icon.component";
 import { AuthService } from './services/auth.service';
 import { AsyncPipe, NgIf } from '@angular/common';
-import { UserStateService } from './services/user-state.service';
 import { SidebarComponent } from "./components/sidebar/sidebar.component";
+import { UserStateFacade } from './facades/user-state.facade';
 
 @Component({
   selector: 'app-root',
@@ -27,9 +27,9 @@ import { SidebarComponent } from "./components/sidebar/sidebar.component";
 export class AppComponent {
   @ViewChild('sidebar') sidebar!: MatSidenav
   title = 'UserManagement';
-  userStateService = inject(UserStateService)
+  userStateFacade = inject(UserStateFacade)
   authService = inject(AuthService)
-  currentUser$ = this.userStateService.currentUser$;
+  currentUser$ = this.userStateFacade.currentUser$;
 
   handleLogoutOutput() {
     this.logout();

@@ -1,22 +1,22 @@
 import { AsyncPipe } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewChild, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIcon } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTooltipModule } from '@angular/material/tooltip';
 import { RouterLink } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { UserStateFacade } from '../../facades/user-state.facade';
 import { User } from '../../interfaces/user.interface';
-import { UserStateService } from '../../services/user-state.service';
 import { UserService } from '../../services/user.service';
 import { BtnComponent } from '../btn/btn.component';
 import { IconComponent } from "../icon/icon.component";
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatIcon } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-table',
@@ -32,8 +32,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   usersServ = inject(UserService);
-  userStateServ = inject(UserStateService)
-  isAdmin = this.userStateServ.isAdmin();
+  userStateFacade = inject(UserStateFacade)
+  isAdmin = this.userStateFacade.isAdmin();
   @Input() users$: Observable<User[]> = new Observable<User[]>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

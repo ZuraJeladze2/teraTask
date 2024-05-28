@@ -6,7 +6,7 @@ import { Subscription, map, switchMap } from 'rxjs';
 import { BtnComponent } from "../../components/btn/btn.component";
 import { FormComponent } from "../../components/form/form.component";
 import { AuthService } from '../../services/auth.service';
-import { UserStateService } from '../../services/user-state.service';
+import { UserStateFacade } from '../../facades/user-state.facade';
 
 @Component({
     selector: 'app-login',
@@ -17,7 +17,7 @@ import { UserStateService } from '../../services/user-state.service';
 })
 export class LoginComponent implements OnDestroy {
     authService = inject(AuthService)
-    userStateService = inject(UserStateService)
+    userStateFacade = inject(UserStateFacade)
     router = inject(Router)
     snackbar = inject(MatSnackBar)
     loginSubscription: Subscription | undefined;
@@ -37,26 +37,17 @@ export class LoginComponent implements OnDestroy {
             const password = this.userForm.get('password')?.value
             this.loginSubscription = this.authService.login(email, password)
                 .pipe(
-                    // takeUntil(this.unSubscriber),
                     map(users => users ? users[0] : null),
                     switchMap(user => {
                         console.warn(user)
-                        if (user) this.userStateService.setCurrentUser(user)
-                        console.log(this.userStateService.currentUser$);
-                        return this.userStateService.currentUser$
+                        if (user) this.userStateFacade.setCurrentUser(user)
+                        console.log(this.userStateFacade.currentUser$);
+                        return this.userStateFacade.currentUser$
                     })
                 )
                 .subscribe(currentUser => {
-                    if (currentUser?.role === 'admin') {
-                        this.router.navigateByUrl('');
-                    }
-                    else if (currentUser?.role === 'user') {
-                        this.router.navigate(['view', currentUser?.id])
-                    }
-                    else if (currentUser === null) {
-                        this.snackbar.open('invalid credentials', '', { duration: 2500 })
-                        this.router.navigate(['login']); // tu localstoragedan washli currentUsers
-                    }
+                    //! swori facadia
+                    this.userStateFacade.handleRolesOnLogin(currentUser)
                 })
         }
         else {
@@ -66,7 +57,6 @@ export class LoginComponent implements OnDestroy {
 
     ngOnDestroy() {
         this.loginSubscription?.unsubscribe()
-
     }
 
 }
