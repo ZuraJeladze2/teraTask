@@ -13,34 +13,26 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   if (isLoggedIn) {
     if (isAdmin) {
-      return true; //admins yvelaferze true
+      return true;
     }
     else {
-      if (state.url.includes('create/')) {
-        if (state.url.includes(`create/${userId}`)) {
+      if (state.url.includes('create/') || state.url.includes('view/')) {
+        if (state.url.includes(`create/${userId}`) || state.url.includes(`view/${userId}`)) {
           return true
         }
         else {
-          snackbar.open('Only admin can edit users', '', { duration: 2000 })
-        }
-      }
-      else if (state.url.includes('view/')) {
-        if (state.url.includes(`view/${userId}`)) {
-          return true
-        }
-        else {
-          snackbar.open('Only admin can view profiles', '', { duration: 2000 })
+          snackbar.open('No access', '', { duration: 2000 })
+          router.navigateByUrl('')
+          return false;
         }
       }
       else if (state.url === '/') {
         return true;
       }
-      // router.navigateByUrl('')
       return false;
     }
   }
 
   router.navigate(['login'])
   return false;
-
 };

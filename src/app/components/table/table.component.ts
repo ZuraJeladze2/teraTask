@@ -49,7 +49,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(takeUntil(this.unSubscriber))
       .subscribe(users => {
         this.dataSource.data = users
-        this.dataSource.paginator = this.paginator; // Reassign paginator after data update
+        this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       });
   }
