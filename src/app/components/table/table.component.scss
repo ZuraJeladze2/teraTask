@@ -1,18 +1,22 @@
-.table-wrapper {
+:host{
     width: 1200px;
 }
 
 table {
 
-    .id-col {
-        width: 150px;
+    th.id-col {
+        padding-left: 3px;
+    }
+
+    td.id-col {
+        padding-left: 12px;
     }
 
     *:not(.id-col) {
         text-align: center;
     }
 
-    
+
     td {
         padding-top: 8px;
         padding-bottom: 8px;
