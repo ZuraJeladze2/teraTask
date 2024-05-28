@@ -1,13 +1,14 @@
 <div class="overlay sidebar">
-    <mat-tab-group mat-stretch-tabs="false" mat-align-tabs="center" animationDuration="200ms">
-        <mat-tab label="General">
-            <app-btn color="warn" (click)="logout()">Logout</app-btn>
-        </mat-tab>
-        <mat-tab label="Add user">
-            <h3 class="form__header">Add user</h3>
-            <app-form state="edit" [form]="userForm"></app-form>
-            <app-btn color="primary" (click)="submit()">Add</app-btn>
-        </mat-tab>
-        <mat-tab label="Third">Content 3</mat-tab>
-    </mat-tab-group>
+    <mat-button-toggle-group #group="matButtonToggleGroup" (change)="toggleTableView(group.value)">
+        <mat-button-toggle [value]="true" aria-label="Table view">
+            <mat-icon>view_list</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle [value]="false" aria-label="Card view">
+            <mat-icon>view_module</mat-icon>
+        </mat-button-toggle>
+    </mat-button-toggle-group>
+    <hr>
+    <h3 class="form__header">Add user</h3>
+    <app-form state="edit" [form]="userForm"></app-form>
+    <app-btn color="primary" (click)="submit()">Add</app-btn>
 </div>

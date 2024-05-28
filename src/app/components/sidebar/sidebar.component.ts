@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnDestroy, Output, inject } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild, inject } from '@angular/core';
 import { FormComponent } from "../form/form.component";
 import { BtnComponent } from '../btn/btn.component';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -8,19 +8,21 @@ import { Router } from '@angular/router';
 import { UserService } from '../../services/user.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { AuthService } from '../../services/auth.service';
-
+import { MatButtonToggleGroup, MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
-  imports: [FormComponent, BtnComponent, MatSnackBarModule, MatTabsModule]
+  imports: [FormComponent, BtnComponent, MatSnackBarModule, MatTabsModule, MatButtonToggleModule, MatIcon]
 })
 export class SidebarComponent implements OnDestroy {
   authService = inject(AuthService)
   snackbar = inject(MatSnackBar)
   router: Router = inject(Router);
   userService = inject(UserService);
+  @ViewChild('group') tableView!: MatButtonToggleGroup;
   @Output() logoutEvent: EventEmitter<any> = new EventEmitter();
   private unSubscriber: Subject<void> = new Subject<void>();
 
@@ -31,6 +33,11 @@ export class SidebarComponent implements OnDestroy {
     password: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
     role: new FormControl<'admin' | 'user'>('user')
   })
+
+
+  toggleTableView(tableView: boolean) {
+    tableView ? this.userService.tableViewOn() : this.userService.tableViewOff();
+  }
 
   submit() {
     this.userForm.markAllAsTouched();
