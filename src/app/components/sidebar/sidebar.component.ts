@@ -1,31 +1,37 @@
-import { Component, ElementRef, EventEmitter, OnDestroy, Output, ViewChild, inject } from '@angular/core';
-import { FormComponent } from "../form/form.component";
-import { BtnComponent } from '../btn/btn.component';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Subject, takeUntil } from 'rxjs';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { UserService } from '../../services/user.service';
-import { MatTabsModule } from '@angular/material/tabs';
-import { AuthService } from '../../services/auth.service';
-import { MatButtonToggleGroup, MatButtonToggleModule } from '@angular/material/button-toggle';
+import { AsyncPipe } from '@angular/common';
+import { Component, EventEmitter, OnDestroy, OnInit, Output, inject } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIcon } from '@angular/material/icon';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Router } from '@angular/router';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { TableFacade } from '../../facades/table.facade';
+import { UserStateFacade } from '../../facades/user-state.facade';
+import { Role, User } from '../../interfaces/user.interface';
+import { AuthService } from '../../services/auth.service';
+import { UserService } from '../../services/user.service';
+import { BtnComponent } from '../btn/btn.component';
+import { FormComponent } from "../form/form.component";
+
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
-  imports: [FormComponent, BtnComponent, MatSnackBarModule, MatTabsModule, MatButtonToggleModule, MatIcon, MatTooltipModule]
+  imports: [FormComponent, BtnComponent, MatSnackBarModule, MatTabsModule, MatButtonToggleModule, MatIcon, MatTooltipModule, AsyncPipe]
 })
 export class SidebarComponent implements OnDestroy {
+
   authService = inject(AuthService)
   snackbar = inject(MatSnackBar)
   router: Router = inject(Router);
   userService = inject(UserService);
   tableFacade: TableFacade = inject(TableFacade)
-  // @ViewChild('group') tableView!: MatButtonToggleGroup;
+  userStateFacade: UserStateFacade = inject(UserStateFacade)
+  currentUser$: Observable<User | null> = this.userStateFacade.currentUser$;
   @Output() logoutEvent: EventEmitter<any> = new EventEmitter();
   private unSubscriber: Subject<void> = new Subject<void>();
 
@@ -34,9 +40,8 @@ export class SidebarComponent implements OnDestroy {
     name: new FormControl<string>('', [Validators.required, Validators.minLength(2)]),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
     password: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
-    role: new FormControl<'admin' | 'user'>('user')
+    role: new FormControl<Role>('user')
   })
-
 
   toggleTableView(tableViewOn: boolean) {
     tableViewOn ? this.tableFacade.tableViewOn() : this.tableFacade.tableViewOff();
@@ -67,5 +72,4 @@ export class SidebarComponent implements OnDestroy {
     this.unSubscriber.next();
     this.unSubscriber.complete();
   }
-
 }

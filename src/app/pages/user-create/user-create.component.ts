@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable, Subject, catchError, of, switchMap, takeUntil, tap } from 'rxjs';
 import { BtnComponent } from "../../components/btn/btn.component";
 import { FormComponent } from "../../components/form/form.component";
-import { User } from '../../interfaces/user.interface';
+import { Role, User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { UserStateFacade } from '../../facades/user-state.facade';
@@ -39,7 +39,7 @@ export class UserCreateComponent implements OnDestroy {
     name: new FormControl<string>('', [Validators.required, Validators.minLength(2)]),
     email: new FormControl<string>('', [Validators.required, Validators.email]),
     password: new FormControl<string>('', [Validators.required, Validators.minLength(4)]),
-    role: new FormControl<'admin' | 'user'>('user')
+    role: new FormControl<Role>('user')
   })
 
   user$: Observable<User | null> = this.route.params.pipe(
@@ -49,19 +49,19 @@ export class UserCreateComponent implements OnDestroy {
         : this.userService.getUser(params['id']).pipe(
           tap(user => {
             this.userForm.patchValue(user);
-          }),
-          switchMap(() => {
-            return this.userStateFacade.currentUser$
-          }),
-          catchError(err => {
-            if (err.status === 404) {
-              this.snackbar.open(this.alertMessage, 'dismiss', { duration: 2000 })
-              this.router.navigateByUrl(''); // Navigate to another page for invalid ID
-            }
-            return of(null); // Continue the stream with null
           })
         )
-    )
+    ),
+    switchMap(() => {
+      return this.userStateFacade.currentUser$
+    }),
+    catchError(err => {
+      if (err.status === 404) {
+        this.snackbar.open(this.alertMessage, 'dismiss', { duration: 2000 })
+        this.router.navigateByUrl(''); // Navigate to another page for invalid ID
+      }
+      return of(null); // Continue the stream with null
+    })
   );
 
   submit() {

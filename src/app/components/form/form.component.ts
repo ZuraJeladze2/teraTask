@@ -3,6 +3,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { Role } from '../../interfaces/user.interface'
 
 @Component({
   selector: 'app-form',
@@ -14,5 +15,5 @@ import { MatSelectModule } from '@angular/material/select';
 export class FormComponent {
   @Input() form!: FormGroup;
   @Input() state!: 'login' | 'register' | 'edit';
-  @Input() currentUserRole: 'admin' | 'user' = 'user' 
+  @Input() currentUserRole: Role = 'user'
 }

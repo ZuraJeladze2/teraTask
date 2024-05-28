@@ -45,7 +45,7 @@ export class UserStateFacade {
     }
   }
   getCurrentUser() {
-    return this.currentUserSubject.value
+    return this.currentUserSubject.value;
   }
 
   isLoggedIn(): boolean {
