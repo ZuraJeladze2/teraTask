@@ -1,7 +1,10 @@
 // form
 .form-wrapper {
     width: 400px;
-    border: 2px solid black;
+    // border: 2px solid black;
+    border-radius: 8px;
+    box-shadow: 0 0 5px -1px,
+    0 8px 20px -8px;
     padding: 25px 10px;
 
     .form__header {
