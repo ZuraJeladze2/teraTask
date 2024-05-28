@@ -19,20 +19,13 @@
       "name": "yes",
       "email": "yea@gmail.com",
       "password": "1232",
-      "role": "user"
+      "role": "admin"
     },
     {
       "id": 5,
       "name": "hahaha",
       "email": "new@gmail.com",
       "password": "1231",
-      "role": "user"
-    },
-    {
-      "id": 7,
-      "name": "number?",
-      "email": "numb@id.com",
-      "password": "vau123",
       "role": "user"
     },
     {
@@ -58,10 +51,17 @@
     },
     {
       "id": 11,
-      "name": "qwe",
+      "name": "sleep",
       "email": "aee@qwe",
       "password": "123123",
       "role": "user"
+    },
+    {
+      "id": 12,
+      "name": "10jer chamedzina ukve",
+      "email": "fermashi@minda.com",
+      "password": "farm123",
+      "role": "admin"
     }
   ]
 }

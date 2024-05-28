@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router, RouterLink } from '@angular/router';
@@ -30,6 +30,11 @@ import { UserStateFacade } from '../../facades/user-state.facade';
      * Style URL for the component.
      */
     styleUrl: './login.component.scss',
+
+    /**
+     * Change detection strategy for the component.
+     */
+    changeDetection: ChangeDetectionStrategy.OnPush,
   
     /**
      * Array of imported Angular modules.
