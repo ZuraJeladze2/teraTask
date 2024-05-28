@@ -1,8 +1,8 @@
 import { Component, OnDestroy, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-import { Subject, Subscription, map, switchMap, takeUntil } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
+import { Subscription, map, switchMap } from 'rxjs';
 import { BtnComponent } from "../../components/btn/btn.component";
 import { FormComponent } from "../../components/form/form.component";
 import { AuthService } from '../../services/auth.service';
@@ -13,16 +13,14 @@ import { UserStateService } from '../../services/user-state.service';
     standalone: true,
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss',
-    imports: [FormComponent, BtnComponent]
+    imports: [FormComponent, BtnComponent, RouterLink]
 })
 export class LoginComponent implements OnDestroy {
     authService = inject(AuthService)
     userStateService = inject(UserStateService)
-    alertMessage: string = '';
     router = inject(Router)
     snackbar = inject(MatSnackBar)
-    vax: Subscription | undefined;
-    private unSubscriber: Subject<void> = new Subject<void>();
+    loginSubscription: Subscription | undefined;
 
     userForm: FormGroup = new FormGroup({
         id: new FormControl<string>(''),
@@ -37,7 +35,7 @@ export class LoginComponent implements OnDestroy {
         if (this.userForm.valid) {
             const email = this.userForm.get('email')?.value
             const password = this.userForm.get('password')?.value
-            this.vax = this.authService.login(email, password)
+            this.loginSubscription = this.authService.login(email, password)
                 .pipe(
                     // takeUntil(this.unSubscriber),
                     map(users => users ? users[0] : null),
@@ -55,23 +53,20 @@ export class LoginComponent implements OnDestroy {
                     else if (currentUser?.role === 'user') {
                         this.router.navigate(['view', currentUser?.id])
                     }
-                    else if(currentUser === null){
+                    else if (currentUser === null) {
                         this.snackbar.open('invalid credentials', '', { duration: 2500 })
                         this.router.navigate(['login']); // tu localstoragedan washli currentUsers
                     }
                 })
         }
         else {
-            this.alertMessage = 'invalid login form!'
-            console.warn(this.alertMessage);
-            this.snackbar.open(this.alertMessage, 'dismiss', { duration: 2500 })
+            this.snackbar.open('invalid login form!', 'dismiss', { duration: 2500 })
         }
     }
 
     ngOnDestroy() {
-        this.vax?.unsubscribe()
-        // this.unSubscriber.next();
-        // this.unSubscriber.complete();
+        this.loginSubscription?.unsubscribe()
+
     }
 
 }

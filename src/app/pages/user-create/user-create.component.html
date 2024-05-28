@@ -12,6 +12,7 @@
             @else {
             <h2 class="form__header">Register User</h2>
             <app-form [form]="userForm" state="register"></app-form>
+            <a routerLink="/login" class="form__link">Already have an account?</a>
             <app-btn color="primary" (click)="submit()">Register</app-btn>
             }
         </ng-container>
