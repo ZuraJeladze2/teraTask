@@ -13,7 +13,7 @@
 
     <mat-form-field class="form__field" appearance="outline">
         <mat-label>Password</mat-label>
-        <input matInput stroke type="password" formControlName="password">
+        <input matInput stroke [type]="state === 'edit' ? 'text' : 'password'" formControlName="password">
     </mat-form-field>
 
     @if(state === 'edit'){
