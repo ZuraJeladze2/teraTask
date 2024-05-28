@@ -1,0 +1,13 @@
+mat-card{
+    position: relative;
+    padding-right: 60px;
+    .card-edit-btn {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+
+    mat-card-actions{
+        margin-top: .75rem;
+    }
+}

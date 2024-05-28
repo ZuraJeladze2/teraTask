@@ -26,7 +26,7 @@ import { TableComponent } from "../../components/table/table.component";
 })
 export class UsersComponent implements OnInit {
   users$: Observable<User[]> = new Observable<User[]>();
-  tableView: boolean = true;
+  tableView: boolean = false;
   constructor(private userService: UserService) { }
 
   ngOnInit() {

@@ -1,9 +1,21 @@
 <mat-card>
     <mat-card-header>
-        <mat-card-title> {{user.name}} #{{user.id}} {{user.role}} </mat-card-title>
-        <mat-card-subtitle> {{user.email}} </mat-card-subtitle>
+        <mat-card-title>
+            <a [routerLink]="['view', user.id]"> #{{user.id}} {{user.name}}</a>
+            <app-icon fab name="edit" class="card-edit-btn" [routerLink]="['create', user.id]"></app-icon>
+        </mat-card-title>
+
+        <mat-card-subtitle>
+            email: {{user.email}} <br>
+            role: {{user.role}}
+        </mat-card-subtitle>
     </mat-card-header>
     <mat-card-actions>
-        <button mat-stroked-button routerLink="">Go Back</button>
+        @if(btnShow){
+            <app-btn color="primary" routerLink="">Go Back</app-btn>
+        }
+        @else {
+            <app-btn [routerLink]="['view', user.id]">Detailed</app-btn>
+        }
     </mat-card-actions>
 </mat-card>
