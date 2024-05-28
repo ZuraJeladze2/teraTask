@@ -10,17 +10,19 @@ import { IconComponent } from "./components/icon/icon.component";
 import { AuthService } from './services/auth.service';
 import { AsyncPipe, NgIf } from '@angular/common';
 import { UserStateService } from './services/user-state.service';
+import { SidebarComponent } from "./components/sidebar/sidebar.component";
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  imports: [
-    RouterOutlet, AsyncPipe, NgIf,
-    MatSidenavModule, MatInputModule, MatIconModule, MatButtonModule, MatToolbarModule, MatDrawer,
-    BtnComponent, IconComponent
-  ]
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.scss',
+    imports: [
+        RouterOutlet, AsyncPipe, NgIf,
+        MatSidenavModule, MatInputModule, MatIconModule, MatButtonModule, MatToolbarModule, MatDrawer,
+        BtnComponent, IconComponent,
+        SidebarComponent
+    ]
 })
 export class AppComponent {
   title = 'UserManagement';
