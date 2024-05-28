@@ -91,8 +91,11 @@ export class UserCreateComponent implements OnDestroy {
       this.snackbar.open(this.alertMessage, '', { duration: 1000 })
       this.userFacade.createUser(userObj)
         .pipe(takeUntil(this.unSubscriber))
-        .subscribe(() => {
+        .subscribe((user) => {
+          console.log('es unda chavseto uech too',user);
+          
           this.userForm.reset();
+          this.userStateFacade.setCurrentUser(user)
           this.router.navigate(['']);
         });
     }
