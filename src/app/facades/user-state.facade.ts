@@ -60,7 +60,7 @@ export class UserStateFacade {
   }
 
 
-  handleRolesOnLogin(currentUser: User): boolean | void {
+  handleRolesOnLogin(currentUser: User | null): boolean | void {
     if (currentUser?.role === 'admin') {
       this.router.navigateByUrl('');
     }
