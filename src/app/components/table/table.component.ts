@@ -16,7 +16,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-table',
@@ -26,7 +26,7 @@ import { MatButtonModule } from '@angular/material/button';
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
     AsyncPipe, RouterLink, FormsModule,
-    MatTableModule, MatPaginatorModule, MatSortModule, MatSort, MatFormFieldModule, MatInputModule, MatIcon, MatButtonModule,
+    MatTableModule, MatPaginatorModule, MatSortModule, MatSort, MatFormFieldModule, MatInputModule, MatIcon, MatButtonModule,MatTooltipModule,
     BtnComponent, IconComponent
   ]
 })
