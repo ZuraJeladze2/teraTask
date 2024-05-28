@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatError, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -10,10 +10,29 @@ import { Role } from '../../interfaces/user.interface'
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule, ReactiveFormsModule, MatSelectModule, MatError],
   templateUrl: './form.component.html',
-  styleUrl: './form.component.scss'
+  styleUrl: './form.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
+/**
+ * Form component
+ */
 export class FormComponent {
+  /**
+   * Form group input
+   * @type {FormGroup}
+   */
   @Input() form!: FormGroup;
+
+  /**
+   * State of the form
+   * @type {'login' | 'register' | 'edit'}
+   */
   @Input() state!: 'login' | 'register' | 'edit';
-  @Input() currentUserRole: Role = 'user'
+
+  /**
+   * Current user role
+   * @type {Role}
+   * @default 'user'
+   */
+  @Input() currentUserRole: Role = 'user';
 }
