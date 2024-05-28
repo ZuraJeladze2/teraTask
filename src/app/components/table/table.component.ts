@@ -13,8 +13,8 @@ import { RouterLink } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { UserStateFacade } from '../../facades/user-state.facade';
+import { UserFacade } from '../../facades/user.facade';
 import { User } from '../../interfaces/user.interface';
-import { UserService } from '../../services/user.service';
 import { BtnComponent } from '../btn/btn.component';
 import { IconComponent } from "../icon/icon.component";
 
@@ -31,10 +31,10 @@ import { IconComponent } from "../icon/icon.component";
   ]
 })
 export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
-  usersServ = inject(UserService);
+  authFacade = inject(UserFacade);
   userStateFacade = inject(UserStateFacade)
   isAdmin = this.userStateFacade.isAdmin();
-  @Input() users$: Observable<User[]> = new Observable<User[]>();
+  @Input() users$!: Observable<User[]>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   displayedColumns: string[] = this.isAdmin ? ['id', 'name', 'email', 'role', 'actions'] : ['id', 'name', 'email'];
@@ -60,7 +60,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   deleteUser(id: string) {
-    this.usersServ.deleteUser(id)
+    this.authFacade.deleteUser(id)
       .pipe(takeUntil(this.unSubscriber))
       .subscribe(); // UserService will update the BehaviorSubject
   }

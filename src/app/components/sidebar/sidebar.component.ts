@@ -15,6 +15,7 @@ import { AuthService } from '../../services/auth.service';
 import { UserService } from '../../services/user.service';
 import { BtnComponent } from '../btn/btn.component';
 import { FormComponent } from "../form/form.component";
+import { UserFacade } from '../../facades/user.facade';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,7 +25,7 @@ import { FormComponent } from "../form/form.component";
   imports: [FormComponent, BtnComponent, MatSnackBarModule, MatTabsModule, MatButtonToggleModule, MatIcon, MatTooltipModule, AsyncPipe]
 })
 export class SidebarComponent implements OnDestroy {
-
+  userFacade = inject(UserFacade)
   authService = inject(AuthService)
   snackbar = inject(MatSnackBar)
   router: Router = inject(Router);
@@ -55,7 +56,7 @@ export class SidebarComponent implements OnDestroy {
     };
 
     const userObj = this.userForm.getRawValue();
-    this.authService.createUser(userObj)
+    this.userFacade.createUser(userObj)
       .pipe(takeUntil(this.unSubscriber))
       .subscribe(() => {
         this.snackbar.open('User added', '', { duration: 1000 })
