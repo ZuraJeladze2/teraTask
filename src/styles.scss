@@ -1,8 +1,5 @@
 @import 'assets/variable';
 
-
-
-/* You can add global styles to this file, and also import other style files */
 * {
   margin: 0;
   padding: 0;
@@ -25,6 +22,10 @@ a {
 
 a:active {
   color: $link_active;
+}
+
+hr {
+  margin: 1em 0;
 }
 
 // flex
@@ -87,21 +88,23 @@ table {
   app-table {
 
 
-    .mdc-data-table__cell, .mdc-data-table__header-cell{
+    .mdc-data-table__cell,
+    .mdc-data-table__header-cell {
       padding: 0;
     }
-    td{
+
+    td {
       padding-left: 5px;
       padding-right: 5px;
     }
-    
+
     td.actions {
       gap: 3px !important;
     }
   }
 
 
-  .navbar__username{
+  .navbar__username {
     display: none !important;
   }
 }

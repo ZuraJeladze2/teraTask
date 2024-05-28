@@ -10,19 +10,20 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { AuthService } from '../../services/auth.service';
 import { MatButtonToggleGroup, MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatIcon } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
-  imports: [FormComponent, BtnComponent, MatSnackBarModule, MatTabsModule, MatButtonToggleModule, MatIcon]
+  imports: [FormComponent, BtnComponent, MatSnackBarModule, MatTabsModule, MatButtonToggleModule, MatIcon, MatTooltipModule]
 })
 export class SidebarComponent implements OnDestroy {
   authService = inject(AuthService)
   snackbar = inject(MatSnackBar)
   router: Router = inject(Router);
   userService = inject(UserService);
-  @ViewChild('group') tableView!: MatButtonToggleGroup;
+  // @ViewChild('group') tableView!: MatButtonToggleGroup;
   @Output() logoutEvent: EventEmitter<any> = new EventEmitter();
   private unSubscriber: Subject<void> = new Subject<void>();
 
@@ -35,8 +36,8 @@ export class SidebarComponent implements OnDestroy {
   })
 
 
-  toggleTableView(tableView: boolean) {
-    tableView ? this.userService.tableViewOn() : this.userService.tableViewOff();
+  toggleTableView(tableViewOn: boolean) {
+    tableViewOn ? this.userService.tableViewOn() : this.userService.tableViewOff();
   }
 
   submit() {

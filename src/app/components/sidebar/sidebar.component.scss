@@ -1,13 +1,21 @@
-.sidebar{
+.sidebar {
+    position: relative;
     padding: 30px 25px;
 
-    mat-tab-group{
-        height: 100%;
-        // border: 2px solid red;
+
+    .toggle-view {
+        h4 {
+            flex-grow: 1;
+        }
     }
-    
+
     .form__header{
-        margin-bottom: 1rem;
+        margin-bottom: .65em;
     }
     
+    .logout{
+        position: absolute;
+        bottom: 15px;
+        right: 15px;
+    }
 }

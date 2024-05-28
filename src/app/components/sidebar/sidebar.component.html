@@ -1,14 +1,22 @@
 <div class="overlay sidebar">
-    <mat-button-toggle-group #group="matButtonToggleGroup" (change)="toggleTableView(group.value)">
-        <mat-button-toggle [value]="true" aria-label="Table view">
-            <mat-icon>view_list</mat-icon>
-        </mat-button-toggle>
-        <mat-button-toggle [value]="false" aria-label="Card view">
-            <mat-icon>view_module</mat-icon>
-        </mat-button-toggle>
-    </mat-button-toggle-group>
+    <div class="toggle-view f-row b">
+        <h4>View Mode</h4>
+        <mat-button-toggle-group #group="matButtonToggleGroup" (change)="toggleTableView(group.value)">
+            <mat-button-toggle matTooltip="Table view" matTooltipShowDelay="800" [value]="true" aria-label="Table view">
+                <mat-icon>view_list</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle matTooltip="Cards view" matTooltipShowDelay="800" [value]="false" aria-label="Card view">
+                <mat-icon>view_module</mat-icon>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+
     <hr>
+
     <h3 class="form__header">Add user</h3>
     <app-form state="edit" [form]="userForm"></app-form>
     <app-btn color="primary" (click)="submit()">Add</app-btn>
+    <app-btn color="warn" (click)="logout()" class="logout">Log out</app-btn>
+    <hr>
+
 </div>
