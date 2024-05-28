@@ -1,3 +1,13 @@
 .sidebar{
     padding: 30px 25px;
+
+    mat-tab-group{
+        height: 100%;
+        // border: 2px solid red;
+    }
+    
+    .form__header{
+        margin-bottom: 1rem;
+    }
+    
 }

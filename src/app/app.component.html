@@ -1,6 +1,6 @@
 <mat-sidenav-container class="overlay">
-    <mat-sidenav mode="over" position="end" opened="true" #nav>
-        <app-sidebar></app-sidebar>
+    <mat-sidenav mode="over" position="end" opened="true" #sidebar>
+        <app-sidebar (logoutEvent)="handleLogoutOutput()"></app-sidebar>
     </mat-sidenav>
     <mat-sidenav-content style="height: 100vh;">
         <mat-toolbar class="fixed-nav">
@@ -11,7 +11,7 @@
                 @if(currentUser$ | async; as user){
                 @if(user.role === 'admin'){
                 <span> {{user.name}} (Admin) </span>
-                <app-icon btn name="menu" (click)="nav.toggle()" />
+                <app-icon btn name="menu" (click)="sidebar.toggle()" />
                 }
                 @else {
                 <span> {{user.name}} (User) </span>
