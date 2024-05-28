@@ -1,15 +1,15 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, OnDestroy, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable, Subject, catchError, of, switchMap, takeUntil, tap } from 'rxjs';
 import { BtnComponent } from "../../components/btn/btn.component";
 import { FormComponent } from "../../components/form/form.component";
+import { UserStateFacade } from '../../facades/user-state.facade';
+import { UserFacade } from '../../facades/user.facade';
 import { Role, User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
-import { MatSnackBar } from '@angular/material/snack-bar'
-import { UserStateFacade } from '../../facades/user-state.facade';
-import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-create',
@@ -31,7 +31,7 @@ export class UserCreateComponent implements OnDestroy {
   router = inject(Router)
   route = inject(ActivatedRoute)
   userService = inject(UserService)
-  authService = inject(AuthService)
+  userFacade = inject(UserFacade)
   userStateFacade = inject(UserStateFacade)
   snackbar = inject(MatSnackBar)
   alertMessage: string = '';
@@ -79,7 +79,7 @@ export class UserCreateComponent implements OnDestroy {
     if (id) {
       this.alertMessage = 'User edited'
       this.snackbar.open(this.alertMessage, '', { duration: 1000 })
-      this.authService.updateUser(userObj)
+      this.userFacade.updateUser(userObj)
         .pipe(takeUntil(this.unSubscriber))
         .subscribe(() => {
           this.userForm.reset();
@@ -89,7 +89,7 @@ export class UserCreateComponent implements OnDestroy {
     else {
       this.alertMessage = 'User created'
       this.snackbar.open(this.alertMessage, '', { duration: 1000 })
-      this.authService.createUser(userObj)
+      this.userFacade.createUser(userObj)
         .pipe(takeUntil(this.unSubscriber))
         .subscribe(() => {
           this.userForm.reset();

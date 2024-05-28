@@ -9,7 +9,7 @@
     },
     {
       "id": 2,
-      "name": "edited",
+      "name": "bugfix",
       "email": "hey@hai.ge",
       "password": "1233123",
       "role": "user"
@@ -19,19 +19,12 @@
       "name": "yes",
       "email": "yea@gmail.com",
       "password": "1232",
-      "role": "user"
+      "role": "admin"
     },
     {
       "id": 5,
-      "name": "new one",
+      "name": "hahaha",
       "email": "new@gmail.com",
-      "password": "1231",
-      "role": "user"
-    },
-    {
-      "id": 6,
-      "name": "test",
-      "email": "test@gmail.com",
       "password": "1231",
       "role": "user"
     },
