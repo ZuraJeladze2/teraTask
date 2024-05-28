@@ -60,9 +60,9 @@ export class UserCreateComponent implements OnDestroy {
     catchError(err => {
       if (err.status === 404) {
         this.snackbar.open(this.alertMessage, 'dismiss', { duration: 2000 })
-        this.router.navigateByUrl(''); // Navigate to another page for invalid ID
+        this.router.navigateByUrl('');
       }
-      return of(null); // Continue the stream with null
+      return of(null);
     })
   );
 
@@ -92,8 +92,8 @@ export class UserCreateComponent implements OnDestroy {
       this.userFacade.createUser(userObj)
         .pipe(takeUntil(this.unSubscriber))
         .subscribe((user) => {
-          console.log('es unda chavseto uech too',user);
-          
+          console.log('es unda chavseto uech too', user);
+
           this.userForm.reset();
           this.userStateFacade.setCurrentUser(user)
           this.router.navigate(['']);

@@ -46,7 +46,6 @@ export class LoginComponent implements OnDestroy {
                     })
                 )
                 .subscribe(currentUser => {
-                    //! swori facadia
                     this.userStateFacade.handleRolesOnLogin(currentUser)
                 })
         }

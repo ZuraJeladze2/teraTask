@@ -68,7 +68,7 @@ export class UserStateFacade {
       this.router.navigate(['view', currentUser?.id])
     }
     else if (currentUser === null) {
-      this.router.navigate(['login']); // tu localstoragedan washli currentUsers
+      this.router.navigate(['login']); // tu localstoragedan xelit washli currentUsers
       this.snackbar.open('invalid credentials', '', { duration: 2500 })
     }
   }
