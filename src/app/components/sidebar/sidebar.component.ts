@@ -55,7 +55,7 @@ export class SidebarComponent implements OnDestroy {
     };
 
     const userObj = this.userForm.getRawValue();
-    this.userService.createUser(userObj)
+    this.authService.createUser(userObj)
       .pipe(takeUntil(this.unSubscriber))
       .subscribe(() => {
         this.snackbar.open('User added', '', { duration: 1000 })

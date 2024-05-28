@@ -9,6 +9,7 @@ import { Role, User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { UserStateFacade } from '../../facades/user-state.facade';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user-create',
@@ -30,6 +31,7 @@ export class UserCreateComponent implements OnDestroy {
   router = inject(Router)
   route = inject(ActivatedRoute)
   userService = inject(UserService)
+  authService = inject(AuthService)
   userStateFacade = inject(UserStateFacade)
   snackbar = inject(MatSnackBar)
   alertMessage: string = '';
@@ -77,7 +79,7 @@ export class UserCreateComponent implements OnDestroy {
     if (id) {
       this.alertMessage = 'User edited'
       this.snackbar.open(this.alertMessage, '', { duration: 1000 })
-      this.userService.updateUser(userObj)
+      this.authService.updateUser(userObj)
         .pipe(takeUntil(this.unSubscriber))
         .subscribe(() => {
           this.userForm.reset();
@@ -87,7 +89,7 @@ export class UserCreateComponent implements OnDestroy {
     else {
       this.alertMessage = 'User created'
       this.snackbar.open(this.alertMessage, '', { duration: 1000 })
-      this.userService.createUser(userObj)
+      this.authService.createUser(userObj)
         .pipe(takeUntil(this.unSubscriber))
         .subscribe(() => {
           this.userForm.reset();

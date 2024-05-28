@@ -1,9 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { share, shareReplay, tap } from 'rxjs/operators';
 import { User } from '../interfaces/user.interface';
 import { UserService } from '../services/user.service';
 import { UserStateFacade } from './user-state.facade';
+import { AuthService } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class UserFacade {
   private usersSubject = new BehaviorSubject<User[]>([]);
   users$ = this.usersSubject.asObservable();
   private userService = inject(UserService);
+  private authService = inject(AuthService)
   private userStateFacade = inject(UserStateFacade);
 
   constructor() {
@@ -19,7 +21,9 @@ export class UserFacade {
   }
 
   loadUsers() {
-    this.userService.loadUsers().subscribe(users => this.usersSubject.next(users));
+    this.userService.loadUsers().pipe(
+      shareReplay(1)
+    ).subscribe(users => this.usersSubject.next(users));
   }
 
   getUsers(): Observable<User[]> {
@@ -27,20 +31,20 @@ export class UserFacade {
   }
 
   getUser(id: string): Observable<User> {
-    return this.userService.getUser(id); 
+    return this.userService.getUser(id);
   }
   getUserByCode(field1: string, value1: string, field2: string, value2: string): Observable<User[] | null> {
     return this.userService.getUserByCode(field1, value1, field2, value2);
   }
-  
+
   createUser(user: Partial<User>) {
-    return this.userService.createUser(user).pipe(
+    return this.authService.createUser(user).pipe(
       tap(() => this.loadUsers())
     )
   }
-  
+
   updateUser(user: User) {
-    return this.userService.updateUser(user).pipe(
+    return this.authService.updateUser(user).pipe(
       tap((updatedUser) => {
         this.loadUsers();
         const currentUser = this.userStateFacade.getCurrentUser();
@@ -50,9 +54,9 @@ export class UserFacade {
       })
     )
   }
-  
+
   deleteUser(id: string) {
-    return this.userService.deleteUser(id).pipe(
+    return this.authService.deleteUser(id).pipe(
       tap(() => this.loadUsers())
     )
   }
