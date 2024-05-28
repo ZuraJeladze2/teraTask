@@ -3,17 +3,35 @@
     <mat-form-field class="form__field" appearance="outline">
         <mat-label>Name</mat-label>
         <input matInput stroke type="text" formControlName="name">
+        @if(form.get('name')?.hasError('required')){
+        <mat-error>Name is required</mat-error>
+        }
+        @if(form.get('name')?.hasError('minlength')){
+        <mat-error>Name must be at least 2 letters</mat-error>
+        }
     </mat-form-field>
     }
 
     <mat-form-field class="form__field" appearance="outline">
         <mat-label>E-mail</mat-label>
         <input matInput stroke type="email" formControlName="email">
+        @if(form.get('email')?.hasError('required')){
+        <mat-error>E-mail is required</mat-error>
+        }
+        @if(form.get('email')?.hasError('email')){
+        <mat-error>Invalid E-mail</mat-error>
+        }
     </mat-form-field>
 
     <mat-form-field class="form__field" appearance="outline">
         <mat-label>Password</mat-label>
         <input matInput stroke [type]="state === 'edit' ? 'text' : 'password'" formControlName="password">
+        @if(form.get('password')?.hasError('required')){
+        <mat-error>Password is required</mat-error>
+        }
+        @if(form.get('password')?.hasError('minlength')){
+        <mat-error>Password must be at least 4 letters</mat-error>
+        }
     </mat-form-field>
 
     @if(state === 'edit' && currentUserRole === 'admin'){
