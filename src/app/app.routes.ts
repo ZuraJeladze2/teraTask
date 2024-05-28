@@ -6,31 +6,31 @@ import { LoginComponent } from './pages/login/login.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-    {
-      path: '',
-      component: UsersComponent,
-      canActivate: [authGuard]
-    },
-    {
-      path: 'create',
-      component: UserCreateComponent
-    },
-    {
-      path: 'login',
-      component: LoginComponent
-    },
-    {
-      path: 'create/:id',
-      component: UserCreateComponent,
-      canActivate: [authGuard]
-    },
-    {
-      path: 'view/:id',
-      component: UserDetailedComponent,
-      canActivate: [authGuard]
-    },
-    {
-      path: '**',
-      redirectTo: ''
-    }
-  ];
+  {
+    path: '',
+    component: UsersComponent,
+    canActivate: [authGuard]
+  },
+  {
+    path: 'create',
+    loadComponent: () => import('./pages/user-create/user-create.component').then(x => x.UserCreateComponent)
+  },
+  {
+    path: 'login',
+    loadComponent: () => import('./pages/login/login.component').then(x => x.LoginComponent)
+  },
+  {
+    path: 'create/:id',
+    loadComponent: () => import('./pages/user-create/user-create.component').then(x => x.UserCreateComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: 'view/:id',
+    loadComponent: () => import('./pages/user-detailed/user-detailed.component').then(x => x.UserDetailedComponent),
+    canActivate: [authGuard]
+  },
+  {
+    path: '**',
+    redirectTo: ''
+  }
+];
