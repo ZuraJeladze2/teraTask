@@ -21,7 +21,7 @@ export class UserFacade {
   }
 
   loadUsers() {
-    this.userService.loadUsers().pipe(
+    this.userService.getUsers().pipe(
       shareReplay(1)
     ).subscribe(users => this.usersSubject.next(users));
   }
