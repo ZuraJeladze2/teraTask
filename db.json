@@ -41,6 +41,27 @@
       "email": "qwe@asd",
       "password": "asdawq",
       "role": "user"
+    },
+    {
+      "id": 9,
+      "name": "guest",
+      "email": "gues2@gmai.com",
+      "password": "1231",
+      "role": "user"
+    },
+    {
+      "id": 10,
+      "name": "awe",
+      "email": "qwe@qwe",
+      "password": "1232",
+      "role": "user"
+    },
+    {
+      "id": 11,
+      "name": "qwe",
+      "email": "aee@qwe",
+      "password": "123123",
+      "role": "user"
     }
   ]
 }

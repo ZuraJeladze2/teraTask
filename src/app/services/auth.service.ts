@@ -25,7 +25,8 @@ export class AuthService {
     this.userStateFacade.clearCurrentUser();
   }
 
-  createUser(user: Partial<User>): Observable<User> {
+  createUser(user: Partial<User>) {
+    user.email = user.email?.toLowerCase()
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.post<User>(`${this.apiUrl}/users`, user, { headers });
   }
