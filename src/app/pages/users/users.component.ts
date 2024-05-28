@@ -25,21 +25,42 @@ import { UserFacade } from '../../facades/user.facade';
   ]
 })
 export class UsersComponent implements OnInit, OnDestroy {
-  userFacade: UserFacade = inject(UserFacade)
-  tableFacade: TableFacade = inject(TableFacade)
+  /**
+   * Instance of the UserFacade service.
+   */
+  userFacade: UserFacade = inject(UserFacade);
+
+  /**
+   * Instance of the TableFacade service.
+   */
+  tableFacade: TableFacade = inject(TableFacade);
+
+  /**
+   * Observable that emits users data.
+   */
   users$ = this.userFacade.getUsers();
+
+  /**
+   * Subscription to the table view state.
+   */
   tableViewSub: Subscription | undefined;
-  getTableView$ = this.tableFacade.getTableView()
 
+  /**
+   * Observable that emits the table view state.
+   */
+  getTableView$ = this.tableFacade.getTableView();
 
-  ngOnInit(){
-    this.tableViewSub = this.getTableView$.subscribe(x => {
-      console.log(x);
-    })
+  /**
+   * Subscribes to the table view state on component initialization.
+   */
+  ngOnInit() {
+    this.tableViewSub = this.getTableView$.subscribe();
   }
 
-
+  /**
+   * Unsubscribes from the table view state on component destruction.
+   */
   ngOnDestroy(): void {
-      this.tableViewSub?.unsubscribe();
+    this.tableViewSub?.unsubscribe();
   }
 }
