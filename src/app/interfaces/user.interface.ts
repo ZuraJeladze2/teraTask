@@ -23,4 +23,4 @@ export interface User {
 /**
  * User Role type (either "user" or "admin")
  */
-type Role = "user" | "admin";
+export type Role = "user" | "admin";
