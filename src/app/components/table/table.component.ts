@@ -11,6 +11,12 @@ import { UserStateService } from '../../services/user-state.service';
 import { UserService } from '../../services/user.service';
 import { BtnComponent } from '../btn/btn.component';
 import { IconComponent } from "../icon/icon.component";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIcon } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @Component({
   selector: 'app-table',
@@ -19,8 +25,8 @@ import { IconComponent } from "../icon/icon.component";
   styleUrls: ['./table.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [
-    AsyncPipe, RouterLink,
-    MatTableModule, MatPaginatorModule, MatSortModule, MatSort,
+    AsyncPipe, RouterLink, FormsModule,
+    MatTableModule, MatPaginatorModule, MatSortModule, MatSort, MatFormFieldModule, MatInputModule, MatIcon, MatButtonModule,
     BtnComponent, IconComponent
   ]
 })
@@ -34,6 +40,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
   displayedColumns: string[] = this.isAdmin ? ['id', 'name', 'email', 'role', 'actions'] : ['id', 'name', 'email'];
   dataSource = new MatTableDataSource<User>();
   private unSubscriber = new Subject<void>();
+  filterVal: string = '';
 
 
   ngOnInit() {
@@ -56,6 +63,11 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
     this.usersServ.deleteUser(id)
       .pipe(takeUntil(this.unSubscriber))
       .subscribe(); // UserService will update the BehaviorSubject
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   ngOnDestroy(): void {

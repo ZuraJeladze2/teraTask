@@ -1,3 +1,12 @@
+<mat-form-field>
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input [(ngModel)]="filterVal">
+    @if (filterVal) {
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="filterVal=''">
+        <mat-icon>close</mat-icon>
+    </button>
+    }
+</mat-form-field>
 <div class="mat-elevation-z8 table-wrapper">
     <table mat-table [dataSource]="dataSource" matSort>
 
@@ -30,7 +39,7 @@
         <!-- actions Column -->
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions </th>
-            <td mat-cell *matCellDef="let element" class="f-row c">
+            <td mat-cell *matCellDef="let element" class="f-row c actions">
                 <app-icon name="perm_identity" [routerLink]="['view', element.id]"></app-icon>
                 <app-icon name="edit" [routerLink]="['create', element.id]"></app-icon>
                 <app-icon color="warn" name="delete" (click)="deleteUser(element.id)"></app-icon>

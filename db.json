@@ -2,8 +2,8 @@
   "users": [
     {
       "id": 1,
-      "name": "Zura1",
-      "email": "Zura@gmail.com",
+      "name": "Zura",
+      "email": "zura@gmail.com",
       "password": "1234",
       "role": "admin"
     },
@@ -12,13 +12,6 @@
       "name": "edited",
       "email": "hey@hai.ge",
       "password": "1233123",
-      "role": "user"
-    },
-    {
-      "id": 3,
-      "name": "register",
-      "email": "reg@us.er",
-      "password": "123123123",
       "role": "user"
     },
     {
