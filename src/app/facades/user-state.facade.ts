@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/user.interface';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ export class UserStateFacade {
   private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
   router = inject(Router)
-  
+  snackbar = inject(MatSnackBar)
+
   constructor() {
     this.loadUserFromLocalStorage();
   }
@@ -55,5 +57,19 @@ export class UserStateFacade {
   }
   getUserId(): number | undefined {
     return this.currentUserSubject.value?.id;
+  }
+
+
+  handleRolesOnLogin(currentUser: User): boolean | void {
+    if (currentUser?.role === 'admin') {
+      this.router.navigateByUrl('');
+    }
+    else if (currentUser?.role === 'user') {
+      this.router.navigate(['view', currentUser?.id])
+    }
+    else if (currentUser === null) {
+      this.router.navigate(['login']); // tu localstoragedan washli currentUsers
+      this.snackbar.open('invalid credentials', '', { duration: 2500 })
+    }
   }
 }

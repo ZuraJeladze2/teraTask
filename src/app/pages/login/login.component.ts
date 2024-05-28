@@ -47,16 +47,8 @@ export class LoginComponent implements OnDestroy {
                     })
                 )
                 .subscribe(currentUser => {
-                    if (currentUser?.role === 'admin') {
-                        this.router.navigateByUrl('');
-                    }
-                    else if (currentUser?.role === 'user') {
-                        this.router.navigate(['view', currentUser?.id])
-                    }
-                    else if (currentUser === null) {
-                        this.snackbar.open('invalid credentials', '', { duration: 2500 })
-                        this.router.navigate(['login']); // tu localstoragedan washli currentUsers
-                    }
+                    //! swori facadia
+                    this.userStateFacade.handleRolesOnLogin(currentUser)
                 })
         }
         else {
@@ -66,7 +58,6 @@ export class LoginComponent implements OnDestroy {
 
     ngOnDestroy() {
         this.loginSubscription?.unsubscribe()
-
     }
 
 }
