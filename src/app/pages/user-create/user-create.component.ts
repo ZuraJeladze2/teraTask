@@ -73,14 +73,20 @@ export class UserCreateComponent implements OnDestroy {
       this.snackbar.open(this.alertMessage, '', { duration: 1000 })
       this.userService.updateUser(userObj)
         .pipe(takeUntil(this.unSubscriber))
-        .subscribe(() => this.router.navigate(['']));
+        .subscribe(() => {
+          this.userForm.reset();
+          this.router.navigate(['']);
+        });
     }
     else {
       this.alertMessage = 'User created'
       this.snackbar.open(this.alertMessage, '', { duration: 1000 })
       this.userService.createUser(userObj)
         .pipe(takeUntil(this.unSubscriber))
-        .subscribe(() => this.router.navigate(['']));
+        .subscribe(() => {
+          this.userForm.reset();
+          this.router.navigate(['']);
+        });
     }
   }
 
