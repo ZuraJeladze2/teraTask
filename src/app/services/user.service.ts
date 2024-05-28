@@ -11,7 +11,7 @@ export class UserService {
   private apiUrl = environment.apiUrl;
   private http = inject(HttpClient);
 
-  loadUsers() {
+  getUsers() {
     return this.http.get<User[]>(`${this.apiUrl}/users`)
   }
 
