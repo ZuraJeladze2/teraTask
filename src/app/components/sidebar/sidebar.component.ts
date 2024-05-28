@@ -33,7 +33,7 @@ export class SidebarComponent implements OnDestroy {
   tableFacade: TableFacade = inject(TableFacade)
   userStateFacade: UserStateFacade = inject(UserStateFacade)
   currentUser$: Observable<User | null> = this.userStateFacade.currentUser$;
-  @Output() logoutEvent: EventEmitter<any> = new EventEmitter();
+  @Output() logoutEvent: EventEmitter<null> = new EventEmitter();
   private unSubscriber: Subject<void> = new Subject<void>();
 
   userForm: FormGroup = new FormGroup({
@@ -65,7 +65,7 @@ export class SidebarComponent implements OnDestroy {
   }
 
   logout() {
-    this.logoutEvent.emit(null)
+    this.logoutEvent.emit()
     this.authService.logout();
   }
 
