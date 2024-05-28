@@ -65,9 +65,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnDestroy {
       .subscribe(); // UserService will update the BehaviorSubject
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+  applyFilter(reset: boolean = false) {
+    if(reset) this.filterVal = '';
+    this.dataSource.filter = this.filterVal.trim().toLowerCase();
   }
 
   ngOnDestroy(): void {

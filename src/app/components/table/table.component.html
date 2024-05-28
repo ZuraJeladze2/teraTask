@@ -1,8 +1,8 @@
 <mat-form-field>
     <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input [(ngModel)]="filterVal">
+    <input matInput (keyup)="applyFilter()" placeholder="Ex. ium" #input [(ngModel)]="filterVal">
     @if (filterVal) {
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="filterVal=''">
+    <button matSuffix mat-icon-button aria-label="Clear" (click)="applyFilter(true)">
         <mat-icon>close</mat-icon>
     </button>
     }
