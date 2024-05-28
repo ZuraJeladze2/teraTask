@@ -14,4 +14,5 @@ import { MatSelectModule } from '@angular/material/select';
 export class FormComponent {
   @Input() form!: FormGroup;
   @Input() state!: 'login' | 'register' | 'edit';
+  @Input() currentUserRole: 'admin' | 'user' = 'user' 
 }
