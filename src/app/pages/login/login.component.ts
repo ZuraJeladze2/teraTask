@@ -1,11 +1,11 @@
 import { Component, OnDestroy, inject } from '@angular/core';
-import { FormComponent } from "../../components/form/form.component";
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { BtnComponent } from "../../components/btn/btn.component";
-import { AuthService } from '../../services/auth.service';
-import { Subject, map, of, switchMap, takeUntil } from 'rxjs';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { Subject, Subscription, map, switchMap, takeUntil } from 'rxjs';
+import { BtnComponent } from "../../components/btn/btn.component";
+import { FormComponent } from "../../components/form/form.component";
+import { AuthService } from '../../services/auth.service';
 import { UserStateService } from '../../services/user-state.service';
 
 @Component({
@@ -21,6 +21,7 @@ export class LoginComponent implements OnDestroy {
     alertMessage: string = '';
     router = inject(Router)
     snackbar = inject(MatSnackBar)
+    vax: Subscription | undefined;
     private unSubscriber: Subject<void> = new Subject<void>();
 
     userForm: FormGroup = new FormGroup({
@@ -36,30 +37,26 @@ export class LoginComponent implements OnDestroy {
         if (this.userForm.valid) {
             const email = this.userForm.get('email')?.value
             const password = this.userForm.get('password')?.value
-            this.authService.login(email, password)
+            this.vax = this.authService.login(email, password)
                 .pipe(
-                    takeUntil(this.unSubscriber),
+                    // takeUntil(this.unSubscriber),
                     map(users => users ? users[0] : null),
-                    switchMap(x => {
-                        console.warn(x)
-                        if (x) this.userStateService.setCurrentUser(x)
+                    switchMap(user => {
+                        console.warn(user)
+                        if (user) this.userStateService.setCurrentUser(user)
                         console.log(this.userStateService.currentUser$);
-
                         return this.userStateService.currentUser$
-                    }),
-                    map(users => {
-                        return users
                     })
                 )
-                .subscribe(x => {
-                    if (x?.role === 'admin') {
+                .subscribe(currentUser => {
+                    if (currentUser?.role === 'admin') {
                         this.router.navigateByUrl('');
                     }
-                    else if (x?.role === 'user') {
-                        this.router.navigate(['view', x?.id])
+                    else if (currentUser?.role === 'user') {
+                        this.router.navigate(['view', currentUser?.id])
                     }
-                    else {
-                        this.snackbar.open('invalid credentials', 'Okay', { duration: 2500 })
+                    else if(currentUser === null){
+                        this.snackbar.open('invalid credentials', '', { duration: 2500 })
                         this.router.navigate(['login']); // tu localstoragedan washli currentUsers
                     }
                 })
@@ -67,13 +64,14 @@ export class LoginComponent implements OnDestroy {
         else {
             this.alertMessage = 'invalid login form!'
             console.warn(this.alertMessage);
-            this.snackbar.open(this.alertMessage, 'dismiss',)
+            this.snackbar.open(this.alertMessage, 'dismiss', { duration: 2500 })
         }
     }
 
     ngOnDestroy() {
-        this.unSubscriber.next();
-        this.unSubscriber.complete();
+        this.vax?.unsubscribe()
+        // this.unSubscriber.next();
+        // this.unSubscriber.complete();
     }
 
 }

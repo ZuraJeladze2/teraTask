@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../interfaces/user.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,8 @@ import { User } from '../interfaces/user.interface';
 export class UserStateService {
   private currentUserSubject: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   currentUser$: Observable<User | null> = this.currentUserSubject.asObservable();
-
+  router = inject(Router)
+  
   constructor() {
     this.loadUserFromLocalStorage();
   }
@@ -25,6 +27,7 @@ export class UserStateService {
   clearCurrentUser(): void {
     this.currentUserSubject.next(null);
     this.removeUserFromLocalStorage();
+    this.router.navigate(['login'])
   }
 
   private saveUserToLocalStorage(user: User): void {
@@ -50,5 +53,8 @@ export class UserStateService {
 
   isAdmin(): boolean {
     return this.currentUserSubject.value?.role === 'admin';
+  }
+  getUserId(): number | undefined{
+    return this.currentUserSubject.value?.id;
   }
 }

@@ -1,8 +1,8 @@
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, map, of, tap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { User } from '../interfaces/user.interface';
-import { UserService } from './user.service';
 import { UserStateService } from './user-state.service';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,13 +19,5 @@ export class AuthService {
 
   logout(): void {
     this.userStateService.clearCurrentUser();
-  }
-
-  isLoggedIn(): boolean {
-    return this.userStateService.isLoggedIn();
-  }
-
-  isAdmin(): boolean {
-    return this.userStateService.isAdmin();
   }
 }

@@ -25,6 +25,10 @@ import { UserStateService } from './services/user-state.service';
 export class AppComponent {
   title = 'UserManagement';
   userStateService = inject(UserStateService)
+  authService = inject(AuthService)
   currentUser$ = this.userStateService.currentUser$;
 
+  logout(){
+    this.authService.logout();    
+  }
 }
