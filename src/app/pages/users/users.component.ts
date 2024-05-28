@@ -11,6 +11,8 @@ import { CardComponent } from "../../components/card/card.component";
 import { User } from '../../interfaces/user.interface';
 import { UserService } from '../../services/user.service';
 import { TableComponent } from "../../components/table/table.component";
+import { UserFacade } from '../../facades/user.facade';
+import { TableFacade } from '../../facades/table.facade';
 
 @Component({
   selector: 'app-users',
@@ -25,10 +27,11 @@ import { TableComponent } from "../../components/table/table.component";
   ]
 })
 export class UsersComponent {
-  userService: UserService = inject(UserService)
-  users$ = this.userService.getUsers();
+  userFacade: UserFacade = inject(UserFacade)
+  tableFacade: TableFacade = inject(TableFacade)
+  users$ = this.userFacade.getUsers();
   tableViewSub: Subscription | undefined;
-  getTableView = this.userService.getTableView()
+  getTableView = this.tableFacade.getTableView()
 
   ngOnInit(){
     this.getTableView.subscribe(x => {
