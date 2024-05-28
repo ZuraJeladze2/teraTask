@@ -2,6 +2,7 @@
     <div class="form-wrapper grid-wrapper">
         <h2 class="form__header">Login</h2>
         <app-form [form]="userForm" state="login"></app-form>
+        <a routerLink="/create" class="form__link">Doesn't have an account?</a>
         <app-btn color="primary" (click)="login()">Login</app-btn>
     </div>
 </div>
