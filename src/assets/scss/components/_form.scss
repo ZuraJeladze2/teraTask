@@ -1,0 +1,15 @@
+// form
+.form-wrapper {
+    width: 400px;
+    border: 2px solid black;
+    padding: 25px 10px;
+
+    .form__header {
+        margin-bottom: 20px;
+    }
+}
+
+.form__link {
+    margin-bottom: 1rem;
+    color: $link;
+}

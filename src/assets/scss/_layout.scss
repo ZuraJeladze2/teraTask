@@ -1,0 +1,31 @@
+.overlay {
+    width: 100%;
+    height: 100%;
+  }
+
+// flex
+.f-row {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: start;
+    gap: 20px;
+
+    &.c {
+        justify-content: center;
+    }
+
+    &.b {
+        justify-content: center;
+    }
+
+    &.e {
+        justify-content: center;
+    }
+}
+
+// grid
+.grid-wrapper {
+    display: grid;
+    place-items: center;
+}

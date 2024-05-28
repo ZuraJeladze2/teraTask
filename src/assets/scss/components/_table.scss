@@ -1,0 +1,49 @@
+
+// table
+table {
+    mat-icon:hover {
+      scale: 1.12;
+    }
+  }
+  
+  @media screen and (width < 1200px) {
+    app-table {
+      width: 100vw !important;
+    }
+  }
+  
+  @media screen and (width < 550px) {
+    app-table {
+  
+  
+      .mdc-data-table__cell,
+      .mdc-data-table__header-cell {
+        padding: 0;
+      }
+  
+      td {
+        padding-left: 5px;
+        padding-right: 5px;
+      }
+  
+      td.actions {
+        gap: 3px !important;
+      }
+    }
+  
+  
+    .navbar__username {
+      display: none !important;
+    }
+  }
+  
+  .mat-sort-header-container {
+    justify-content: center;
+    position: relative;
+    left: 8px;
+  }
+  
+  .id-col .mat-sort-header-container {
+    justify-content: start;
+  }
+  

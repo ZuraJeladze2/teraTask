@@ -10,11 +10,11 @@
             <div class="f-row">
                 @if(currentUser$ | async; as user){
                 @if(user.role === 'admin'){
-                <span class="navbar__username"> {{user.name}} (Admin) </span>
+                <a class="navbar__username" [routerLink]="['/', 'view', user.id]"> {{user.name}} (Admin) </a>
                 <app-icon btn name="menu" (click)="sidebar.toggle()" />
                 }
                 @else {
-                <span class="navbar__username"> {{user.name}} (User) </span>
+                <a class="navbar__username" [routerLink]="['/', 'view', user.id]"> {{user.name}} (User) </a>
                 <app-icon fab name="exit_to_app" (click)="logout()"></app-icon>
                 }
                 }
