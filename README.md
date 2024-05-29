@@ -1,13 +1,13 @@
-# Tera Bank User Management Dashboard
-Welcome to the Tera Bank User Management Dashboard! This Angular application is designed to manage user profiles with different roles, providing features such as authorization, profile editing and user listing.
+# Tera Bank User Management Dashboard 
+🫡 Welcome to the Tera Bank User Management Dashboard! This Angular application is designed to manage user profiles with different roles, providing features such as authorization, profile editing and user listing.
 Built with:
-* Angular v17
-* RxJS
-* Angular lazy loading Routes
-* Angular Material
-* and Reactive Forms
+* Angular v17 🔥
+* RxJS 🔥
+* Angular lazy loading Routes 🔥
+* Angular Material 🔥
+* and Reactive Forms 🔥
   
-this dashboard offers a modern and efficient user interface. It features a simple and clean design aimed at providing a user-friendly experience. The emphasis is on simplicity and clarity, with a minimalist approach to design elements. This ensures ease of use and reduces cognitive load for users interacting with the application. The code is written with best practices (I hope 😹) using RxJS superpowers for state management and data streaming through the application. Streams are well controlled / optimized and not overused, thanks to RxJS operators.
+🚀 this dashboard offers a modern and efficient user interface. It features a simple and clean design aimed at providing a user-friendly experience. The emphasis is on simplicity and clarity, with a minimalist approach to design elements. This ensures ease of use and reduces cognitive load for users interacting with the application. The code is written with best practices (I hope 😹) using RxJS superpowers for state management and data streaming through the application. Streams are well controlled / optimized and not overused, thanks to RxJS operators.
 
 
 ## How to run
