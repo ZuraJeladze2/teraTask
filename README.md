@@ -1,27 +1,24 @@
-# UserManagement
+# Tera Bank User Management Dashboard
+Welcome to the Tera Bank User Management Dashboard! This Angular application is designed to manage user profiles with different roles, providing features such as authorization, profile editing and user listing.
+Built with:
+* Angular v17
+* RxJS
+* Angular lazy loading Routes
+* Angular Material
+* and Reactive Forms
+  
+this dashboard offers a modern and efficient user interface. It features a simple and clean design aimed at providing a user-friendly experience. The emphasis is on simplicity and clarity, with a minimalist approach to design elements. This ensures ease of use and reduces cognitive load for users interacting with the application. The code is written with best practices (I hope 😹) using RxJS superpowers for state management and data streaming through the application. Streams are well controlled / optimized and not overused, thanks to RxJS operators.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.3.
 
-## Development server
+## How to run
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+First of all, traditionally run `npm i` to install node modules.
+Also you have to make sure you have json-server installed on your machine, if not, run `npm i json-server`.
+Okay now we are ready to run our (I mean my) app:
 
-## Code scaffolding
+1. open terminal and run `npm run teraApp` to run the json-server
+2. open new terminal and run `ng serve` to run the app.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### That's it, congratulations!
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+I hope you'll like it because I'm not having a good night sleep for 6 days straight 😹
