@@ -150,7 +150,7 @@ export class UserCreateComponent implements OnDestroy {
         .pipe(takeUntil(this.unSubscriber))
         .subscribe(() => {
           this.userForm.reset();
-          this.router.navigate(['']);
+          this.router.navigate(['/users']);
         });
     } else {
       this.snackbar.open('User created', '', { duration: 1000 });
@@ -159,7 +159,7 @@ export class UserCreateComponent implements OnDestroy {
         .subscribe((user) => {
           this.userForm.reset();
           this.userStateFacade.setCurrentUser(user);
-          this.router.navigate(['']);
+          this.router.navigate(['/users']);
         });
     }
   }

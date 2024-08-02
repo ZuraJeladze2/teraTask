@@ -20,6 +20,13 @@
       "email": "helloworld@gmail.com",
       "password": "123123123",
       "role": "user"
+    },
+    {
+      "id": 5,
+      "name": "gamarjoba",
+      "email": "gamarjoba@gmail.com",
+      "password": "123123123",
+      "role": "user"
     }
   ]
 }

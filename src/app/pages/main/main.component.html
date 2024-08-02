@@ -1,0 +1,73 @@
+<mat-card appearance="raised" class="card">
+    <mat-card-header>
+        <mat-card-title>Welcome to User Management App!</mat-card-title>
+    </mat-card-header>
+    <br>
+    <mat-card-content>
+        <p>
+            Welcome to the IT Academy STEP User Management Dashboard! This Angular application is designed to manage
+            user
+            profiles with different roles, providing features such as authorization, profile editing and user listing.
+            Built with:
+        </p>
+        <br>
+        <mat-divider></mat-divider>
+        <br>
+        <ul>
+            <li>Angular v17</li>
+            <li>RxJS</li>
+            <li>Angular lazy loading Routes</li>
+            <li>Angular Material</li>
+            <li>and Reactive Forms</li>
+        </ul>
+        <br>
+        <br>
+        <p>
+            This application is a part of the IT Academy STEP Angular course. It is designed to demonstrate the basic
+            concepts of Angular, such as components, services, routing, and forms. The application is built with Angular
+            Material, a UI component library that provides a set of high-quality components for building responsive and
+            accessible web applications.
+        </p>
+        <br><br>
+        <p>
+            The application consists of three main components: the User List, the User Profile, and the User Edit. The
+            User
+            List component displays a list of users with their names, emails, and roles. The User Profile component
+            displays
+            the details of a selected user, including their name, email, and role. The User Edit component allows the
+            user to
+            edit the details of a selected user, including their name, email, and role.
+        </p>
+        <br><br>
+        <p>
+            This dashboard offers a modern and efficient user interface. It features a simple and clean design aimed at
+            providing a user-friendly experience. The emphasis is on simplicity and clarity, with a minimalist approach
+            to design elements. This ensures ease of use and reduces cognitive load for users interacting with the
+            application. The code is written with best practices using RxJS superpowers for state management and data
+            streaming through the application. Streams are well controlled / optimized and not overused, thanks to RxJS
+            operators.
+        </p>
+    </mat-card-content>
+</mat-card>
+
+
+<mat-card class="card">
+    <div class="disable grid-wrapper">
+        <a [routerLink]="['/users']">
+            <button mat-raised-button class="overlay-text">
+                <span>Try it out</span>
+                <mat-icon>open_in_new</mat-icon>
+            </button>
+        </a>
+    </div>
+    <mat-card-header>
+        <mat-card-title>Users list</mat-card-title>
+    </mat-card-header>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <mat-card-content>
+        <app-table [users$]="users$"></app-table>
+    </mat-card-content>
+</mat-card>
+<br><br><br><br><br>

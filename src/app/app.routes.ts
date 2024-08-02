@@ -1,11 +1,17 @@
 import { Routes } from '@angular/router';
 import { authGuard } from './guards/auth.guard';
 import { UsersComponent } from './pages/users/users.component';
+import { MainComponent } from './pages/main/main.component';
 
 export const routes: Routes = [
   {
-    // Path for the default page (users list)
     path: '',
+    component: MainComponent,
+    canActivate: [authGuard] // Protects access to this route with the authGuard
+  },
+  {
+    // Path for the default page (users list)
+    path: 'users',
     component: UsersComponent,
     canActivate: [authGuard] // Protects access to this route with the authGuard
   },

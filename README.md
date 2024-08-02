@@ -1,5 +1,5 @@
-# IT STEP Academy User Management Dashboard 
-🫡 Welcome to the IT STEP Academy User Management Dashboard! This Angular application is designed to manage user profiles with different roles, providing features such as authorization, profile editing and user listing.
+# IT Academy STEP User Management Dashboard 
+🫡 Welcome to the IT Academy STEP User Management Dashboard! This Angular application is designed to manage user profiles with different roles, providing features such as authorization, profile editing and user listing.
 Built with:
 * Angular v17 🔥
 * RxJS 🔥

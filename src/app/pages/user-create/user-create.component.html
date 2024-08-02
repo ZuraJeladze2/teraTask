@@ -5,14 +5,14 @@
             <h2 class="form__header">Edit User</h2>
             <app-form [currentUserRole]="user.role" [form]="userForm" state="edit"></app-form>
             <div class="f-row btn-wrapper">
-                <app-btn routerLink="">Cancel</app-btn>
+                <app-btn [routerLink]="['/users']">Cancel</app-btn>
                 <app-btn color="primary" (click)="submit()">Save</app-btn>
             </div>
             }
             @else {
             <h2 class="form__header">Register User</h2>
             <app-form [form]="userForm" state="register"></app-form>
-            <a routerLink="/login" class="form__link">Already have an account?</a>
+            <a [routerLink]="['/login']" class="form__link">Already have an account?</a>
             <app-btn color="primary" (click)="submit()">Register</app-btn>
             }
         </ng-container>

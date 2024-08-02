@@ -1,8 +1,12 @@
 .fixed-nav{
-    position: fixed;
+    // position: fixed;
     top: 0;
     left: 0;
-    right: 0;
+    padding: 0 30px;
+    border-bottom: 2px solid black;
+    // border-bottom: 1px solid;
+    // border-image-source: linear-gradient(to right, transparent 5%, black, transparent 95%);
+    // border-image-slice: 1;
 
     .app-name{
         color: #000;

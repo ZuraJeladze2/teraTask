@@ -1,0 +1,45 @@
+.card {
+    position: relative;
+    margin-top: 40px;
+    margin-inline: 300px;
+    padding: 20px;
+}
+
+mat-toolbar {
+    position: fixed;
+    top: 100px;
+    left: 0;
+    right: 0;
+}
+
+mat-card-title {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+mat-card-content ul {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+.card .disable{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right:0;
+    bottom: 0;
+    z-index: 3;
+    transition: all 0.3s;
+    
+    .overlay-text{
+        opacity: 0;
+        transition: all 0.3s;
+    }
+
+    &:hover .overlay-text{
+        opacity: 1;
+    }
+}
+.card .disable:hover{
+    backdrop-filter: blur(3px) brightness(0.5);
+}
