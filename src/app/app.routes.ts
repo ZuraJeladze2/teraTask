@@ -22,12 +22,6 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/user-create/user-create.component').then(x => x.UserCreateComponent)
   },
   {
-    // Path for logging in
-    path: 'login',
-    // Lazy loading of the LoginComponent
-    loadComponent: () => import('./pages/login/login.component').then(x => x.LoginComponent)
-  },
-  {
     // Path for updating an existing user by ID
     path: 'create/:id',
     // Lazy loading of the UserCreateComponent
@@ -40,6 +34,20 @@ export const routes: Routes = [
     // Lazy loading of the UserDetailedComponent
     loadComponent: () => import('./pages/user-detailed/user-detailed.component').then(x => x.UserDetailedComponent),
     canActivate: [authGuard] // Protects access to this route with the authGuard
+  },
+  {
+    // Path for logging in
+    path: 'login',
+    // Lazy loading of the LoginComponent
+    loadComponent: () => import('./pages/login/login.component').then(x => x.LoginComponent)
+  },
+  {
+    path: 'about',
+    loadComponent: () => import('./pages/about/about.component').then(x => x.AboutComponent)
+  },
+  {
+    path: 'contact',
+    loadComponent: () => import('./pages/contact/contact.component').then(x => x.ContactComponent)
   },
   {
     // Wildcard path to redirect to the default page (users list) if the entered URL doesn't match any of the defined paths
