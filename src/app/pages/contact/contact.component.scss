@@ -1,0 +1,41 @@
+.card {
+  position: relative;
+  margin-top: 200px;
+  margin-inline: auto;
+  padding: 20px;
+  max-width: 500px;
+
+  mat-card-title {
+    font-size: 30px;
+    font-weight: bold;
+    margin: auto;
+  }
+
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+
+  .example-full-width {
+    width: 100%;
+  }
+
+  td {
+    padding-right: 8px;
+  }
+
+  .button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+
+  mat-card-content {
+
+    .contact-info{
+      padding: 10px 30px;
+      background: red;
+    }
+  }
+}

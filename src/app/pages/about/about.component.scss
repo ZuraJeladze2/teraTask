@@ -11,8 +11,13 @@ mat-toolbar {
     right: 0;
 }
 
+mat-card-header{
+    display: flex;
+    justify-content: center;
+}
+
 mat-card-title {
-    font-size: 24px;
+    font-size: 40px;
     font-weight: bold;
 }
 
