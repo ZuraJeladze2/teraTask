@@ -11,6 +11,25 @@
     .app-name{
         color: #000;
     }
+
+    nav{
+        padding: 15px;
+        border-right: 2px solid black;
+        margin-right: 15px;
+
+        .links{
+            gap: 20px;
+
+            li{
+                list-style-type: none;
+                
+            }
+        }
+    }
+    
+    a{
+        color: #000;
+    }
 }
 
 .example-spacer {

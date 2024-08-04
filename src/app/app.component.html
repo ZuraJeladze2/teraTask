@@ -7,6 +7,14 @@
             <a [routerLink]="['/']" class="app-name">User Management</a>
 
             <span class="example-spacer"></span>
+            <nav>
+                <ul class="f-row links">
+                    <li><a [routerLink]="['/']">Home</a></li>
+                    <li><a [routerLink]="['/users']">Dashboard</a></li>
+                    <li><a [routerLink]="['/about']">About</a></li>
+                    <li><a [routerLink]="['/contact']">Contact</a></li>
+                </ul>
+            </nav>
             <div class="f-row">
                 @if(currentUser$ | async; as user){
                 @if(user.role === 'admin'){
