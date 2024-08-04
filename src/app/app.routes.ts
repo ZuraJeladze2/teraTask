@@ -50,8 +50,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/contact/contact.component').then(x => x.ContactComponent)
   },
   {
-    // Wildcard path to redirect to the default page (users list) if the entered URL doesn't match any of the defined paths
     path: '**',
-    redirectTo: ''
+    loadComponent: () => import('./pages/not-found/not-found.component').then(x => x.NotFoundComponent)
   }
 ];
